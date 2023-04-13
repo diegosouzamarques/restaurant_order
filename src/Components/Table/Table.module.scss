@@ -1,0 +1,74 @@
+.table{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 5px solid;
+    border-right: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-radius: 5px;
+    margin: 0.3rem;
+    padding: 0.3rem;
+    cursor: pointer;
+    width: 20vw;
+    max-width: 300px;
+    height: 15vh;
+
+    &__status__occupied{
+        background: var(--gradient_occupied);
+        border-color: var(--border_occupied);
+    }
+
+    &__status__available{
+        background: var(--gradient_available);
+        border-color: var(--border_available);
+    }
+
+    &__status__dirty{
+        background: var(--gradient_dirty);
+        border-color: var(--border_dirty);
+    }
+
+    &__status__unavailable{
+        background: var(--gradient_unavailable);
+        border-color: var(--border_unavailable);
+    }
+    
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+
+        &__status{
+            font-weight: 400;
+            text-align: right;
+        }
+
+        &__status__occupied{
+            color: var(--status_occupied);
+            text-decoration: var(--status_text_occupied); 
+        }
+
+        &__status__available{
+            color: var(--status_available);
+            text-decoration: var(--status_text_available); 
+        }   
+          
+        &__status__dirty{
+            color: var(--status_dirty);
+            text-decoration: var(--status_text_dirty); 
+        } 
+
+        &__status__unavailable{
+            color: var(--status_unavailable);
+            text-decoration: var(--status_text_unavailable); 
+        } 
+        
+    }
+
+
+    &__requester{
+        display: flex;
+        justify-content: space-between;
+    }
+}

@@ -1,0 +1,22 @@
+:root {
+--gradient_occupied : linear-gradient(to bottom, white, #faf2f2, #f4e8e8, #e9cbcb, #e9c3c3);
+--border_occupied: red;
+--status_occupied: red;
+--status_occupied_text: underline red;
+
+--gradient_available : linear-gradient(to bottom, white, #f2f2f2, #e4f8e8, #ccebcb, #cce3c3);
+--border_available: green;
+--status_available: green;
+--status_text_available: underline green;
+
+--gradient_dirty : linear-gradient(to bottom, white, #fffff2, #ffffe8, #ffffcb, #feffc3);
+--border_dirty: #feffc3;
+--status_dirty: black;
+--status_text_dirty: underline black;
+
+--gradient_unavailable : linear-gradient(to bottom, white, #f2f2ff, #e4f8ff, #ccebff, #cce3ff);
+--border_unavailable: blue;
+--status_unavailable: blue;
+--status_text_unavailable: underline blue;
+
+}
