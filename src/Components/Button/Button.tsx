@@ -6,7 +6,7 @@ interface propsButton {
     onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
     children?: React.ReactNode;
     type: "button" | "submit" | "reset";
-    nipple?: "order" | "shut";
+    nipple?: "order" | "shut" | "item";
   }
 
 const Button = ({ ...props }: propsButton) => {
