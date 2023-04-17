@@ -6,18 +6,53 @@ import ListItem from "../../Components/ListItem/ListItem";
 import ItemOrder from "../../Type/Item";
 import Option from "../../Type/Option";
 import style from "./Order.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const Order = () => {
-  const opcoes: Option[] = [{id: 1, name:"Mesa 01"}, {id: 2, name:"Mesa 02"}, {id: 3, name:"Mesa 03"}];  
-  const items: ItemOrder[] = [{title:"Chocolate Quente", qtd:3, total: 15}, {title:"X-Tudão", qtd:3, total: 75}, {title:"Batata Cheddar", qtd:1, total: 5}]; 
+  const navigate = useNavigate();
+  const opcoes: Option[] = [
+    { id: -1, name: "Escolha uma mesa" },
+    { id: 1, name: "Mesa 01" },
+    { id: 2, name: "Mesa 02" },
+    { id: 3, name: "Mesa 03" },
+  ];
+  const items: ItemOrder[] = [
+    { title: "Chocolate Quente", qtd: 3, valor: 15.37 },
+    { title: "X-Tudão", qtd: 3, valor: 75.78 },
+    { title: "Batata Cheddar", qtd: 1, valor: 5.67 },
+  ];
   return (
     <section className={style.container}>
-        <h1>New Order</h1>
-        <InputDefault id="requester" title="Solicitante" type="text"></InputDefault>
-        <Select id="table" title="Mesa" options={opcoes} selected="Escolha uma mesa"></Select>
-        <TextArea id="note" title="Observação" placeholder="Observação" maxCharacter={350}></TextArea>
-        <Button type="button" nipple="item">Add Item</Button>
-        <ListItem title="Items" items={items}></ListItem>
+      <h1>New Order</h1>
+      <InputDefault
+        id="requester"
+        title="Solicitante"
+        type="text"
+      ></InputDefault>
+      <Select
+        id="table"
+        title="Mesa"
+        options={opcoes}
+        selectedValue={opcoes[0]}
+      ></Select>
+      <TextArea
+        id="note"
+        title="Observação"
+        placeholder="Observação"
+        maxCharacter={350}
+      ></TextArea>
+      <Button
+        className={style.container__btn}
+        type="button"
+        nipple="item"
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/item");
+        }}
+      >
+        Escolha Prato & Bebida
+      </Button>
+      <ListItem title="Items" items={items}></ListItem>
     </section>
   );
 };

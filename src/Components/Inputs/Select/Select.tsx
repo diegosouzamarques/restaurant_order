@@ -7,17 +7,22 @@ import { useState } from "react";
 interface ISelect {
   id: string;
   title: string;
-  selected?: string;
+  selectedValue?: Option;
   options: Array<Option>;
 }
 
 const Select = ({ ...props }: ISelect) => {
   const [valid, setValid] = useState(true);
+
+  const onBlur = (event: React.FocusEvent<HTMLSelectElement>) => {
+    event.preventDefault();
+    setValid(event.currentTarget.validity.valid);
+  };
+
   return (
   
       <label htmlFor={props.id} className={style.input__title}>
-      <select id={props.id}>
-      {props.selected?<option disabled selected>{props.selected}</option>:""} 
+      <select id={props.id} onBlur={onBlur} defaultValue={props.selectedValue?.id}>    
         {props.options.map((item, index) => (
           <option key={index} value={item.id}>
             {item.name}

@@ -7,6 +7,7 @@ interface propsButton {
     children?: React.ReactNode;
     type: "button" | "submit" | "reset";
     nipple?: "order" | "shut" | "item";
+    className?: string;
   }
 
 const Button = ({ ...props }: propsButton) => {
@@ -15,6 +16,7 @@ const Button = ({ ...props }: propsButton) => {
         <button
         type={props.type}
         className={classNames({
+          [props.className?props.className:""]:true,
           [style.button]: true,
           [style[`button__${props.nipple}`]]:true,
           [style.button__hidde]: props.hidde,

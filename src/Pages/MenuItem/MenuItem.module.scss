@@ -1,0 +1,64 @@
+.menuOption{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 3rem;
+    flex-wrap: wrap;
+    
+    & li{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 0.3rem solid orange;
+      border-radius: 5px;
+    }
+
+    &__icon::before {
+      display: block;
+      height: 3rem;
+      width: 3rem;
+    }
+
+    &__icon_Pasta_Risottos::before {
+      content: url("../../assets/icons_menu/rissoto.svg");
+    }
+
+    &__icon_Salads::before {
+      content: url("../../assets/icons_menu/salad.svg");
+    }
+
+    &__icon_Broths_Soups::before {
+      content: url("../../assets/icons_menu/soup.svg");
+    }
+
+    &__icon_Antipasti::before {
+      content: url("../../assets/icons_menu/antipasti.svg");
+    }
+
+    &__icon_Roasts::before {
+      content: url("../../assets/icons_menu/roast.svg");
+    }
+
+    &__icon_Pizza::before {
+      content: url("../../assets/icons_menu/pizza.svg");
+    }
+
+    &__icon_Wines::before {
+      content: url("../../assets/icons_menu/wine.svg");
+    }
+
+    &__icon_Drinks::before {
+      content: url("../../assets/icons_menu/drink.svg");
+    }
+
+    &__icon_Soft_Drinks::before {
+      content: url("../../assets/icons_menu/softdrink.svg");
+    }
+
+    &__icon_Juices::before {
+      content: url("../../assets/icons_menu/juice.svg");
+    }
+
+    &__icon_Desserts::before {
+      content: url("../../assets/icons_menu/dessert.svg");
+    }
+}

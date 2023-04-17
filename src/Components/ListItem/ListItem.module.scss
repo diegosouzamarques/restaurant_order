@@ -1,4 +1,26 @@
-ul:before{
-    content:attr(aria-label);
-    font-weight:bold;
+.list {
+  font-size: 18px;
+  font-weight: 400;
+  width: 25vw;
+  border: 1px solid black;
+  border-radius: 5px;
+  & li:first-child{
+    font-size: 24px;
+    background: rgb(65, 85, 199);
+    color: white;
+    padding: 5px;
+  }
+
+  & li:not(:first-child){
+    padding: 5px;
+    margin: 15px 10px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & li:last-child{
+    border-bottom: 0px;
+  }
+
 }

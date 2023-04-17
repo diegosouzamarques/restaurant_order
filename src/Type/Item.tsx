@@ -1,7 +1,7 @@
 type ItemOrder = {
     title:string,
     qtd: number,
-    total:number
+    valor:number
 }
 
 export default ItemOrder;
