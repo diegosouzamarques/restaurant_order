@@ -1,3 +1,4 @@
+import DisheDrink from "../../Components/DisheDrink/DisheDrink";
 import { CategoryMenu } from "../../Enum/CategoryMenu";
 import style from "./MenuItem.module.scss";
 import classNames from "classnames";
@@ -10,7 +11,7 @@ const MenuItem = () => {
     setActive(Number(event.currentTarget.id));
   };
   return (
-    <>
+    <section>
       <ul className={style.menuOption}>
         {menuOption.map((item, index) => {
           let nameClass =
@@ -40,7 +41,20 @@ const MenuItem = () => {
                   [style.menu]: active < 0,
                   [style.menuSelected]: active > -1
                 })} ><span>{menuOption[active]}</span></h1>
-    </>
+      <div className={style.container}>
+        <DisheDrink></DisheDrink>
+        <DisheDrink></DisheDrink>
+        <DisheDrink></DisheDrink>
+        <DisheDrink></DisheDrink>
+        <DisheDrink></DisheDrink>
+        <DisheDrink></DisheDrink>
+        <DisheDrink></DisheDrink>
+        <DisheDrink></DisheDrink>
+        <DisheDrink></DisheDrink>
+        <DisheDrink></DisheDrink>
+      </div>
+                
+    </section>
   );
 };
 

@@ -124,7 +124,7 @@
   margin: 10px 15px 20px 15px;
   & span::after {
     background: #fff;
-    padding: 0 10px;
+    padding: 0 20px;
     content: "Escolha um Menu";
   }
 }
@@ -137,6 +137,12 @@
   color: orange;
   & span {
     background: #fff;
-    padding: 0 10px;
+    padding: 0 20px;
   }
+}
+
+.container{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
