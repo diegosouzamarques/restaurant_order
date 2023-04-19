@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import style from "./DisheDrinkDetails.module.scss";
-import imgExemplo from "../../assets/img/Pizza napolitana.png";
+import Carousel from "../../Components/Carousel/Carousel";
 
 const DisheDrinkDetails = () => {
   const { id } = useParams();
@@ -11,7 +11,7 @@ const DisheDrinkDetails = () => {
         Pizza Marguerita Pizza Marguerita Pizza Marguerita
       </h1>
       <div className={style.container__photos}>
-        <img className={style.container__photos__img} src={imgExemplo} />
+        <Carousel></Carousel>
       </div>
       <p className={style.descript}>
           Vale ressaltar que o selo de “pizza napolitana” compreende duas

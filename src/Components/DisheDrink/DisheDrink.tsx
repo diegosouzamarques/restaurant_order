@@ -1,16 +1,18 @@
-import imgExemplo from "../../assets/img/Pizza napolitana.png";
 import style from "./DisheDrink.module.scss";
 import { useNavigate } from "react-router-dom";
+import Carousel from "../../Components/Carousel/Carousel";
 
 const DisheDrink = () => {
   const navigate = useNavigate();
   return (
-    <article className={style.dishe}  onClick={(e) => {
+    <article className={style.dishe} >
+      <div className={style.dishe__photos}>
+        <Carousel></Carousel>
+      </div>
+      <div className={style.dishe__content} onClick={(e) => {
       e.preventDefault();
       navigate("/detail/10");
     }}>
-      <img className={style.dishe__img} src={imgExemplo} />
-      <div className={style.dishe__content}>
         <h1 className={style.dishe__content__title}>Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita</h1>
         <p className={style.dishe__content__descript}>
           Vale ressaltar que o selo de “pizza napolitana” compreende duas

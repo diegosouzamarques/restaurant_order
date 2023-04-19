@@ -4,27 +4,23 @@
 }
 
 .container__photos{
-   width: 100vw;
-   text-align: center;
    padding: 1.3rem 0;
-    &__img{
-        border-radius: 5px;
-        width: 45vw;
-    }
 }
 
 .descript{
     padding: 0 1.3rem; 
+    font-size: 1.5rem;
 }
 
 .type {
     margin: 1.3rem;
+    font-size: 1.5rem;
     & span {
       margin-right: 0.8rem;
     }
   }
 
-  .price {
+.price {
     font-weight: bold;
     color: red;
   }
