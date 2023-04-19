@@ -58,6 +58,10 @@
     color: rgb(57, 79, 244);
     transform: translate3d(0, -12px, 0) scale(0.75);
   }
+
+  &__contador__visible {
+    display: none;
+  }
 }
 
 .erro_validacao {

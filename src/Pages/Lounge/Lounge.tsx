@@ -14,7 +14,11 @@ const Lounge = () => {
           e.preventDefault();
           navigate("/order");
         }}>Abrir Mesa</Button>
-        <Button type="button" nipple="shut">Fechar Mesa</Button>
+        <Button type="button" nipple="shut"
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/close/15");
+        }}>Fechar Mesa</Button>
       </div>
       <section className={style.lounge}>
         <Table status={TableStatus.unavailable}></Table>

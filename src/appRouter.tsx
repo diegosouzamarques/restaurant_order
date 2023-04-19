@@ -3,6 +3,7 @@ import Order from "./Pages/Order/Order";
 import Lounge from "./Pages/Lounge/Lounge";
 import MenuItem from "./Pages/MenuItem/MenuItem";
 import DisheDrinkDetails from "./Pages/DisheDrinkDetails/DisheDrinkDetails";
+import CloseOrder from "./Pages/CloseOrder/CloseOrder";
 
 const AppRouter = () => {
     return(
@@ -12,6 +13,7 @@ const AppRouter = () => {
                 <Route path="order" element={<Order/>}></Route>
                 <Route path="menu" element={<MenuItem/>}></Route>
                 <Route path="detail/:id" element={<DisheDrinkDetails/>}></Route>
+                <Route path="close/:id" element={<CloseOrder/>}></Route>
              </Routes>
         </Router>
     );
