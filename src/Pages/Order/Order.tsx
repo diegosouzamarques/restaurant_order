@@ -47,7 +47,7 @@ const Order = () => {
         nipple="item"
         onClick={(e) => {
           e.preventDefault();
-          navigate("/item");
+          navigate("/menu");
         }}
       >
         Escolha Prato & Bebida

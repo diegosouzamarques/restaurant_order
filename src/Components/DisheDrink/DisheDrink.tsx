@@ -1,9 +1,14 @@
 import imgExemplo from "../../assets/img/Pizza napolitana.png";
 import style from "./DisheDrink.module.scss";
-import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
+
 const DisheDrink = () => {
+  const navigate = useNavigate();
   return (
-    <article className={style.dishe}>
+    <article className={style.dishe}  onClick={(e) => {
+      e.preventDefault();
+      navigate("/detail/10");
+    }}>
       <img className={style.dishe__img} src={imgExemplo} />
       <div className={style.dishe__content}>
         <h1 className={style.dishe__content__title}>Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita</h1>
