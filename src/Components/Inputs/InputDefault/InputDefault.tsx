@@ -11,7 +11,6 @@ interface IInputDefault {
   maxCharacter?: number;
   msgError?: string;
   required?: boolean | undefined;
-  disabled?: boolean; 
 }
 
 const InputDefault = ({ ...props }: IInputDefault) => {
@@ -50,7 +49,6 @@ const InputDefault = ({ ...props }: IInputDefault) => {
         onInvalid={onInvalid}
         onInput={onInput}
         onBlur={onBlur}   
-        disabled={props.disabled}  
       />
       <span className={style.input__title__input__label}>{props.title}</span>
       <span

@@ -52,7 +52,7 @@ const Order = () => {
       >
         Escolha Prato & Bebida
       </Button>
-      <ListItem title="Items" items={items}></ListItem>
+      <ListItem items={items}></ListItem>
     </section>
   );
 };
