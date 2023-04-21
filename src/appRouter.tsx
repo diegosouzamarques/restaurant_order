@@ -4,6 +4,7 @@ import Lounge from "./Pages/Lounge/Lounge";
 import MenuItem from "./Pages/MenuItem/MenuItem";
 import DisheDrinkDetails from "./Pages/DisheDrinkDetails/DisheDrinkDetails";
 import CloseOrder from "./Pages/CloseOrder/CloseOrder";
+import DisheDrinksRegister from "./Pages/DisheDrinksRegister/DisheDrinksRegister";
 
 const AppRouter = () => {
     return(
@@ -14,6 +15,7 @@ const AppRouter = () => {
                 <Route path="menu" element={<MenuItem/>}></Route>
                 <Route path="detail/:id" element={<DisheDrinkDetails/>}></Route>
                 <Route path="close/:id" element={<CloseOrder/>}></Route>
+                <Route path="register" element={<DisheDrinksRegister/>}></Route>
              </Routes>
         </Router>
     );

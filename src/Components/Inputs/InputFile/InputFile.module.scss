@@ -1,26 +1,10 @@
 .input__title {
-  display: flex;
-  flex-direction: column;
   position: relative;
   border-radius: 3px;
   overflow: hidden;
   width: 25vw;
+  height: 56px;
 
-  & select {
-    height: 56px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 100%;
-    border: 0;
-    font-family: inherit;
-    padding: 16px 12px 0 12px;
-    font-size: 18px;
-    font-weight: 400;
-    box-shadow: inset 0 -3px 0 #2dcf8e;
-    color: #000;
-    transition: all 0.15s ease;
-  }
 
   & &__input__label {
     position: absolute;
@@ -35,29 +19,39 @@
     pointer-events: none;
   }
 
-  & select:hover {
+  & &__input__value{
+    padding: 16px 12px 0 12px;
+    width: 100%;
+    border: 0;
+    font-family: inherit;
+    padding: 16px 12px 0 12px;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  & input:hover {
     background: rgba(0, 0, 0, 0.03);
     box-shadow: inset 0 -3px 0 #2dcf8e;
   }
 
-  & select:not(:-moz-placeholder-shown) + &__input__label {
+  & input:not(:-moz-placeholder-shown) + &__input__label {
     color: #2dcf8e;
     transform: translate3d(0, -12px, 0) scale(0.75);
   }
-  & select:not(:-ms-input-placeholder) + &__input__label {
+  & input:not(:-ms-input-placeholder) + &__input__label {
     color: #2dcf8e;
     transform: translate3d(0, -12px, 0) scale(0.75);
   }
-  & select:not(:placeholder-shown) + &__input__label {
+  & input:not(:placeholder-shown) + &__input__label {
     color: #2dcf8e;
     transform: translate3d(0, -12px, 0) scale(0.75);
   }
-  & select:focus {
+  & input:focus {
     background: rgba(0, 0, 0, 0.03);
     outline: none;
     box-shadow: inset 0 -3px 0 rgb(57, 79, 244);
   }
-  & select:focus + &__input__label {
+  & input:focus + &__input__label {
     color: rgb(57, 79, 244);
     transform: translate3d(0, -12px, 0) scale(0.75);
   }
@@ -78,4 +72,27 @@
   outline: none !important;
   border: solid;
   border: 3px solid #f73859;
+}
+
+[data-iconfile]::after { 
+  display: block;
+  content: url('../../../assets/img/upload.svg');
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+[data-lblfile] { 
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  box-shadow: inset 0 -3px 0 #2dcf8e;
+  padding-bottom: .5rem;
+}
+
+[data-lblfile]:hover { 
+  cursor: pointer;
+}
+
+input[type=file] {
+  display: none
 }
