@@ -9,8 +9,11 @@ import style from "./DisheDrinksRegister.module.scss";
 import { useState, useEffect  } from "react";
 import Carousel from "../../Components/Carousel/Carousel";
 import { IDisheDrink } from "../../Interface/IDisheDrink";
+import { useNavigate } from "react-router-dom";
 
 const DisheDrinksRegister = () => { 
+  const navigate = useNavigate();
+  
   const optionKind: Option[] = [
     { id:"", name: "Escolha um gênero" },
     { id: 1, name: "Prato" },
@@ -53,7 +56,6 @@ const DisheDrinksRegister = () => {
 
   return (
     <section className={style.container}>
-      <h1>DisheDrinksRegister</h1>
       <Button
         type="submit"
         nipple="order"
@@ -144,7 +146,8 @@ const DisheDrinksRegister = () => {
         </div>
 
       </div>
-      <div className={style.container__photos}>
+      <div className={classNames({[style.container__photos]: true,
+                                  [style.container__photos__visible]: imagens?imagens?.length > 0 : false })}>
          <Carousel imagens={imagens}></Carousel>
       </div>
     </section>

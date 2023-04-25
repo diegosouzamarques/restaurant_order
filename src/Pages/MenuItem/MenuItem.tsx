@@ -1,10 +1,13 @@
+import Button from "../../Components/Button/Button";
 import DisheDrink from "../../Components/DisheDrink/DisheDrink";
 import { CategoryMenu } from "../../Enum/CategoryMenu";
 import style from "./MenuItem.module.scss";
 import classNames from "classnames";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MenuItem = () => {
+  const navigate = useNavigate();
   let menuOption = Object.values(CategoryMenu);
   const [active, setActive] = useState(-1);
   const onClick = (event: React.MouseEvent<HTMLLIElement>) => {

@@ -18,30 +18,39 @@ const InputDefault = ({ ...props }: IInputDefault) => {
   const [valid, setValid] = useState(true);
 
   const toChanger = (evento: React.ChangeEvent<HTMLInputElement>) => {
-    if (props.type === "number" && (evento.target.value.includes('.')))
-    {
+    if (props.type === "number" && (evento.target.value.includes('.'))){
       let test = evento.target.value.substring(evento.target.value.indexOf('.')+1, evento.target.value.length);
       if(test.length > 2)
       return;
-    }
+    } 
 
     if (props.toChange) props.toChange(evento.target.value);
     
   };
 
-  const onInvalid = (event: React.FormEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setValid(event.currentTarget.validity.valid);
+  const onInvalid = (evento: React.FormEvent<HTMLInputElement>) => {
+    evento.preventDefault();
+    setValid(evento.currentTarget.validity.valid);
+    console.log("onInvalid");
   };
 
-  const onInput = (event: React.FormEvent<HTMLInputElement>) => {
-    event.preventDefault();
+  const onInput = (evento: React.FormEvent<HTMLInputElement>) => {
+    evento.preventDefault();
     setValid(true);
+    console.log("onInput");    
   };
 
-  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setValid(event.currentTarget.validity.valid);
+  const onBlur = (evento: React.FocusEvent<HTMLInputElement>) => {
+    evento.preventDefault();
+    if (props.type === "number" && (evento.target.value.length > 0)){
+      
+      let num = Number(evento.target.value);
+      let min = Number(props.min);
+      setValid((num > min));
+
+      return;
+    } 
+    setValid(evento.currentTarget.validity.valid);
   };
 
   return (

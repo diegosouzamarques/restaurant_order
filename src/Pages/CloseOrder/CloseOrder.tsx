@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import style from "./CloseOrder.module.scss";
 import Option from "../../Type/Option";
 import Select from "../../Components/Inputs/Select/Select";
@@ -11,6 +11,7 @@ import classNames from "classnames";
 
 const CloseOrder = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const opcoes: Option[] = [
     { id: -1, name: "Escolha uma mesa" },
@@ -42,7 +43,6 @@ const CloseOrder = () => {
 
   return (
     <div className={style.close}>
-      <h1 className={style.close__title}>Close Order</h1>
       <section className={style.close__container}>
         <div className={style.close__container__order}>
           <Select

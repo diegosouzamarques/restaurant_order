@@ -1,0 +1,27 @@
+.conteiner{
+    width:100vw;
+    height: 100vh;
+    position: fixed;
+    background-image: url('../../assets/img/not_found.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  
+    &__btn{
+      position: absolute;
+      padding: 0.15rem 1rem;
+    }
+  
+    button
+    {
+      width: fit-content;
+    }
+  
+    @media screen and (max-width:1024px) {
+      & {
+        background-repeat: repeat-y;
+        background-size: contain;
+      }
+      
+    }
+  }  

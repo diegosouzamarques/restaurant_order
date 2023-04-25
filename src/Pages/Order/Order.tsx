@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const Order = () => {
   const navigate = useNavigate();
+
   const opcoes: Option[] = [
     { id: -1, name: "Escolha uma mesa" },
     { id: 1, name: "Mesa 01" },
@@ -22,38 +23,39 @@ const Order = () => {
     { title: "Batata Cheddar", qtd: 1, valor: 5.67 },
   ];
   return (
-    <section className={style.container}>
-      <h1>New Order</h1>
-      <InputDefault
-        id="requester"
-        title="Solicitante"
-        type="text"
-      ></InputDefault>
-      <Select
-        id="table"
-        title="Mesa"
-        options={opcoes}
-        selectedValue={opcoes[0]}
-      ></Select>
-      <TextArea
-        id="note"
-        title="Observação"
-        placeholder="Observação"
-        maxCharacter={350}
-      ></TextArea>
-      <Button
-        className={style.container__btn}
-        type="button"
-        nipple="item"
-        onClick={(e) => {
-          e.preventDefault();
-          navigate("/menu");
-        }}
-      >
-        Escolha Prato & Bebida
-      </Button>
-      <ListItem items={items}></ListItem>
-    </section>
+    <>
+      <section className={style.container}>
+        <InputDefault
+          id="requester"
+          title="Solicitante"
+          type="text"
+        ></InputDefault>
+        <Select
+          id="table"
+          title="Mesa"
+          options={opcoes}
+          selectedValue={opcoes[0]}
+        ></Select>
+        <TextArea
+          id="note"
+          title="Observação"
+          placeholder="Observação"
+          maxCharacter={350}
+        ></TextArea>
+        <Button
+          className={style.container__btn}
+          type="button"
+          nipple="item"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/menu");
+          }}
+        >
+          Escolha Prato & Bebida
+        </Button>
+        <ListItem items={items}></ListItem>
+      </section>
+    </>
   );
 };
 
