@@ -3,20 +3,26 @@ import classNames from "classnames";
 import { useState } from "react";
 
 interface IInputFile {
-    toChange?: (value: string) => void;
-    value?: string;
+    toChange?: (value?: File) => void;
+    value?: File;
     id: string;
     title: string;
     maxCharacter?: number;
     msgError?: string;
     required?: boolean | undefined;
+    accept?: string;
   }
 
 const InputFile = ({ ...props }: IInputFile) =>{
     const [valid, setValid] = useState(true);
 
     const toChanger = (evento: React.ChangeEvent<HTMLInputElement>) => {
-        if (props.toChange) props.toChange(evento.target.value);
+        if (props.toChange) props.toChange(evento.target.files?evento.target.files[0]:undefined);
+        let list = evento.target.files;
+        let file:File;
+        if (list) {file = list[0];
+
+       console.log(file);}
       };
     
       const onInvalid = (event: React.FormEvent<HTMLInputElement>) => {
@@ -43,10 +49,10 @@ const InputFile = ({ ...props }: IInputFile) =>{
     return(
         <label data-lblfile  htmlFor={props.id} className={style.input__title}>         
         <input
-          value={props.value}
           onChange={toChanger}
           type="file"
           id={props.id}
+          accept={props.accept}
           placeholder="&nbsp;"
           maxLength={props.maxCharacter}
           required={props.required}
@@ -56,7 +62,7 @@ const InputFile = ({ ...props }: IInputFile) =>{
           onBlur={onBlur}   
         />
         <span className={style.input__title__input__label}>{props.title}</span>
-        <span className={style.input__title__input__value}>{nameFile(props.value||"")  || `Escolha uma arquivo`}</span> <i data-iconfile></i> 
+        <span className={style.input__title__input__value}>{nameFile(props.value?.name||"")  || `Escolha uma arquivo`}</span> <i data-iconfile></i> 
         <span
           className={classNames({
             [style.erro_validacao]: true,

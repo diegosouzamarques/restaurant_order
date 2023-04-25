@@ -10,6 +10,7 @@ interface ISelect {
   selectedValue?: Option;
   options: Array<Option>;
   value?: string;
+  required?: boolean | undefined;
 }
 
 const Select = ({ ...props }: ISelect) => {
@@ -19,19 +20,34 @@ const Select = ({ ...props }: ISelect) => {
     if (props.toChange) props.toChange(evento.target.value);
   };
 
-  const onBlur = (event: React.FocusEvent<HTMLSelectElement>) => {
+  const onInvalid = (event: React.FormEvent<HTMLSelectElement>) => {
     event.preventDefault();
     setValid(event.currentTarget.validity.valid);
+  };
+
+  const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
+    event.preventDefault();
+    setValid(true);
+  };
+
+  const onBlur = (event: React.FocusEvent<HTMLSelectElement>) => {
+    event.preventDefault();
+    
+    setValid(event.currentTarget.validity.valid);
+    console.log(event.currentTarget.validity.valid);
   };
 
   return (
     <label htmlFor={props.id} className={style.input__title}>
       <select
         id={props.id}
-        onBlur={onBlur}
         defaultValue={props.selectedValue?.id}
         value={props.value}
         onChange={toChanger}
+        required={props.required}
+        onInvalid={onInvalid}
+        onInput={onInput}
+        onBlur={onBlur}
       >
         {props.options.map((item, index) => (
           <option key={index} value={item.id}>
@@ -47,8 +63,8 @@ const Select = ({ ...props }: ISelect) => {
           [style.possui_erro_validacao]: !valid,
         })}
       >
-        <i className="fa-solid fa-triangle-exclamation"></i> Por favor preencha
-        o nome
+        <i className={style.validacao_icon}>Por favor preencha&nbsp; 
+        {props.title}</i>
       </span>
     </label>
   );

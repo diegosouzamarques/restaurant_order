@@ -6,17 +6,50 @@ import Select from "../../Components/Inputs/Select/Select";
 import TextArea from "../../Components/Inputs/TextArea/TextArea";
 import Option from "../../Type/Option";
 import style from "./DisheDrinksRegister.module.scss";
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 import Carousel from "../../Components/Carousel/Carousel";
+import { IDisheDrink } from "../../Interface/IDisheDrink";
 
-const DisheDrinksRegister = () => {
+const DisheDrinksRegister = () => { 
   const optionKind: Option[] = [
-    { id: 0, name: "Escolha um gênero" },
+    { id:"", name: "Escolha um gênero" },
     { id: 1, name: "Prato" },
     { id: 2, name: "Bebida" },
   ];
-  const [file, setFile] = useState("");
+  
   const [kind, setKind] = useState(0);
+  const [message, setMessage] = useState("");
+
+  const [title, setTitle] = useState("");
+  const [descript, setDescript] = useState("");
+  const [origin, setOrigin] = useState("");
+  const [type, setType] = useState("");
+  const [volume, setVolume] = useState("");
+  const [price, setPrice] = useState("");                                         
+  const [imagens, setImagens] = useState<File[]>();
+
+  useEffect(() => {
+  }, []);
+
+  const submeterForm = () => {
+    try {
+      const resgiter: IDisheDrink = {
+        id: undefined,
+        kind,
+        title,
+        descript,
+        origin,
+        type,
+        volume:Number(volume),
+        price:Number(price)
+      };
+
+
+    } catch (error) {
+      let e = error  as Error;
+      setMessage(e.message);
+    }
+  };
 
   return (
     <section className={style.container}>
@@ -36,21 +69,26 @@ const DisheDrinksRegister = () => {
             title="Gênero"
             options={optionKind}
             selectedValue={optionKind[0]}
-            toChange={(value) => {let i = Number(value); console.log(optionKind[i]); setKind(i)}}
+            toChange={(value) => {let i = Number(value); setKind(i)}}
+            required
           ></Select>
 
           <InputDefault
             id="title"
             type="text"
-            title="Name"
+            title="Nome"
             maxCharacter={40}
             required
+            value={title}
+            toChange={(value) => setTitle(value)}
           ></InputDefault>
           <TextArea
             id="descript"
             title="Descrição"
             maxCharacter={350}
             required
+            value={descript}
+            toChange={(value) => setDescript(value)}
           ></TextArea> 
       
         </div>
@@ -58,15 +96,23 @@ const DisheDrinksRegister = () => {
         <div>
           <InputDefault
             id="price"
-            type="text"
+            type="number"
             title="Preço"
-            maxCharacter={10}
+            maxCharacter={10}            
+            value={price}
+            toChange={(value) => setPrice(value)}
+            required
+            min={0.01}
           ></InputDefault>
-                    <InputFile
+          <InputFile
             id="file"
             title="Escolha Imagem"
-            value={file}
-            toChange={(value) => setFile(value)}
+            toChange={(value) => {
+              (imagens) 
+       ? setImagens(prevState => [value!, ...prevState! ])
+       : setImagens([value!]);
+            }}
+            accept=".png, .jpg, .jpeg"
           ></InputFile> 
         </div> 
 
@@ -76,24 +122,30 @@ const DisheDrinksRegister = () => {
             type="text"
             title="Origem"
             maxCharacter={50}
+            value={origin}
+            toChange={(value) => setOrigin(value)}
           ></InputDefault>
           <InputDefault
             id="type"
             type="text"
             title="Tipo"
             maxCharacter={50}
+            value={type}
+            toChange={(value) => setType(value)}
           ></InputDefault>
           <InputDefault
             id="volume"
-            type="text"
+            type="number"
             title="Volume (ml)"
             maxCharacter={10}
+            value={volume}
+            toChange={(value) => setVolume(value)}
           ></InputDefault>
         </div>
 
       </div>
       <div className={style.container__photos}>
-         <Carousel></Carousel>
+         <Carousel imagens={imagens}></Carousel>
       </div>
     </section>
   );

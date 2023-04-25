@@ -2,8 +2,20 @@ import style from "./DisheDrink.module.scss";
 import { useNavigate } from "react-router-dom";
 import Carousel from "../../Components/Carousel/Carousel";
 
+import napolitana from "../../assets/img/Pizza napolitana.png";
+import scaled from "../../assets/img/DSF5019-6-scaled.jpg";
+import imgExemplo from "../../assets/img/images.jpg";
+import Imagem from "../../Type/Image";
+
 const DisheDrink = () => {
   const navigate = useNavigate();
+
+  const imagens: Imagem[] = [
+    { src: napolitana, alt: "Photo Upload" },
+    { src: scaled, alt: "Photo Upload" },
+    { src: imgExemplo, alt: "Photo Upload" },
+  ];
+
   return (
     <article className={style.dishe} >
       <div className={style.dishe__photos}>

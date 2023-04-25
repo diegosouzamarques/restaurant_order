@@ -2,7 +2,17 @@ import { useParams } from "react-router-dom";
 import style from "./DisheDrinkDetails.module.scss";
 import Carousel from "../../Components/Carousel/Carousel";
 
+import napolitana from "../../assets/img/Pizza napolitana.png";
+import scaled from "../../assets/img/DSF5019-6-scaled.jpg";
+import imgExemplo from "../../assets/img/images.jpg";
+import Imagem from "../../Type/Image";
+
 const DisheDrinkDetails = () => {
+  const imagens: Imagem[] = [
+    { src: napolitana, alt: "Photo Upload" },
+    { src: scaled, alt: "Photo Upload" },
+    { src: imgExemplo, alt: "Photo Upload" },
+  ];
   const { id } = useParams();
   return (
     <>

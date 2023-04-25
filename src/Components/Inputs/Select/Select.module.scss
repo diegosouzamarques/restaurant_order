@@ -7,7 +7,7 @@
   width: 25vw;
 
   & select {
-    height: 56px;
+    height: 72px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -78,4 +78,12 @@
   outline: none !important;
   border: solid;
   border: 3px solid #f73859;
+}
+
+.validacao_icon::before {
+  display: inline-block;
+  margin-right: .5em;
+  height: 1em;
+  width: 1em;
+  content: url("../../../assets/icons_validations/exclamation.svg");
 }

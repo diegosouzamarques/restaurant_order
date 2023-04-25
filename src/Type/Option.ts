@@ -1,5 +1,5 @@
 type Option =  {
-    id: number;
+    id: number | string;
     name: string;
 }
 

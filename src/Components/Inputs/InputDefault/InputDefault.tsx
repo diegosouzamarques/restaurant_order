@@ -6,18 +6,27 @@ interface IInputDefault {
   toChange?: (value: string) => void;
   value?: string;
   id: string;
-  type: "text" | "date" | "password";
+  type: "text" | "date" | "password" | "number";
   title: string;
   maxCharacter?: number;
   msgError?: string;
   required?: boolean | undefined;
+  min?: string | number;
 }
 
 const InputDefault = ({ ...props }: IInputDefault) => {
   const [valid, setValid] = useState(true);
 
   const toChanger = (evento: React.ChangeEvent<HTMLInputElement>) => {
+    if (props.type === "number" && (evento.target.value.includes('.')))
+    {
+      let test = evento.target.value.substring(evento.target.value.indexOf('.')+1, evento.target.value.length);
+      if(test.length > 2)
+      return;
+    }
+
     if (props.toChange) props.toChange(evento.target.value);
+    
   };
 
   const onInvalid = (event: React.FormEvent<HTMLInputElement>) => {
@@ -48,7 +57,8 @@ const InputDefault = ({ ...props }: IInputDefault) => {
         autoComplete="off"
         onInvalid={onInvalid}
         onInput={onInput}
-        onBlur={onBlur}   
+        onBlur={onBlur}
+        min={props.min}
       />
       <span className={style.input__title__input__label}>{props.title}</span>
       <span
@@ -58,8 +68,8 @@ const InputDefault = ({ ...props }: IInputDefault) => {
           [style.possui_erro_validacao]: !valid,
         })}
       >
-        <i className="fa-solid fa-triangle-exclamation"></i> Por favor preencha
-        o nome
+        <i className={style.validacao_icon}>Por favor preencha&nbsp; 
+        {props.title}</i>
       </span>
     </label>
   );

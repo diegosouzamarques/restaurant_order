@@ -27,6 +27,21 @@ const TextArea = ({ ...props }: ITextArea) => {
     setCharacteres(evento.target.value.length);
   };
 
+  const onInvalid = (event: React.FormEvent<HTMLTextAreaElement>) => {
+    event.preventDefault();
+    setValid(event.currentTarget.validity.valid);
+  };
+
+  const onInput = (event: React.FormEvent<HTMLTextAreaElement>) => {
+    event.preventDefault();
+    setValid(true);
+  };
+
+  const onBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
+    event.preventDefault();
+    setValid(event.currentTarget.validity.valid);
+  };
+
   return (
     
 
@@ -42,6 +57,9 @@ const TextArea = ({ ...props }: ITextArea) => {
         cols={30} 
         rows={5} 
         placeholder="&nbsp;"
+        onInvalid={onInvalid}
+        onInput={onInput}
+        onBlur={onBlur} 
       />
       <span className={style.input__title__input__label}>{props.title}</span>
       <span
@@ -57,8 +75,8 @@ const TextArea = ({ ...props }: ITextArea) => {
           [style.possui_erro_validacao]: !valid,
         })}
       >
-        <i className="fa-solid fa-triangle-exclamation"></i> Por favor preencha
-        o nome
+        <i className={style.validacao_icon}>Por favor preencha&nbsp; 
+        {props.title}</i>
       </span>
     </label>
 
