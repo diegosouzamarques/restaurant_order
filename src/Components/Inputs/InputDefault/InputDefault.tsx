@@ -31,13 +31,11 @@ const InputDefault = ({ ...props }: IInputDefault) => {
   const onInvalid = (evento: React.FormEvent<HTMLInputElement>) => {
     evento.preventDefault();
     setValid(evento.currentTarget.validity.valid);
-    console.log("onInvalid");
   };
 
   const onInput = (evento: React.FormEvent<HTMLInputElement>) => {
     evento.preventDefault();
     setValid(true);
-    console.log("onInput");    
   };
 
   const onBlur = (evento: React.FocusEvent<HTMLInputElement>) => {

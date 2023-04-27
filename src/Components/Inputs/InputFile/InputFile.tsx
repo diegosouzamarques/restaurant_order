@@ -18,11 +18,6 @@ const InputFile = ({ ...props }: IInputFile) =>{
 
     const toChanger = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (props.toChange) props.toChange(evento.target.files?evento.target.files[0]:undefined);
-        let list = evento.target.files;
-        let file:File;
-        if (list) {file = list[0];
-
-       console.log(file);}
       };
     
       const onInvalid = (event: React.FormEvent<HTMLInputElement>) => {

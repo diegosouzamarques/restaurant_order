@@ -9,7 +9,7 @@ interface IStatus {
 const Table = ({ status }: IStatus) => {
 
     let statusTable = Object.keys(TableStatus)[Object.values(TableStatus).indexOf(status)];
-    console.log(statusTable);
+
 return(
         <div className={classNames(style.table, style[`table__status__${statusTable}`])}>
             <div className={style.table__header}>

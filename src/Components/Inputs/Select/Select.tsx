@@ -34,7 +34,6 @@ const Select = ({ ...props }: ISelect) => {
     event.preventDefault();
     
     setValid(event.currentTarget.validity.valid);
-    console.log(event.currentTarget.validity.valid);
   };
 
   return (

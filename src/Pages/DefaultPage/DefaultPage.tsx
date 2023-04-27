@@ -1,13 +1,16 @@
 import { Outlet, matchPath, useParams, useLocation, useNavigate } from "react-router-dom";
 import style from "./DefaultPage.module.scss";
 import Button from "../../Components/Button/Button";
+import MenuHambuger from "../../Components/MenuHambuger/MenuHambuger";
 
 const DefaultPage = () => {
   let { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  let returnTitle = (id: string | undefined) => {
 
+  let btnBackHide = Boolean(matchPath(location.pathname, "/"));
+
+  let returnTitle = (id: string | undefined) => {
     let routes = [
       { path: `/register/${id}`, title: "Register Dishe & Drink" },
       { path: `/register/`, title: "Register Dishe & Drink" },
@@ -21,20 +24,22 @@ const DefaultPage = () => {
     const result = routes.filter((obj) => {
       return matchPath(location.pathname, obj.path);
     });
-
-    return result[0].title||"Manage Eatery";
+    
+    return result.length > 0?result[0].title||"Manage Eatery":"Manage Eatery";
   };
 
   return (
-    <div className={style.container}>
+    <>
+     <MenuHambuger />
+     <div className={style.container}>
       <header className={style.container__header}>
-      <Button
-             type="button"
+      <Button type="button"
              children={"< Voltar"}
              nipple="item"
+             hidde={btnBackHide}
              onClick={() => {
                navigate(-1);
-             }}/>
+             }}/>                    
         <h1 className={style.container__header__titulo}>
           Eatery - {returnTitle(id)}
         </h1>
@@ -42,7 +47,9 @@ const DefaultPage = () => {
       <div className={style.container__outlet}>
          <Outlet/> 
       </div>
-    </div>
+    </div> 
+    </>
+
   );
 };
 

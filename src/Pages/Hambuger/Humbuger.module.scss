@@ -1,0 +1,100 @@
+.wrapper {
+  &__sidebar {
+    background: rgb(5, 68, 104);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 225px;
+    height: 100%;
+    padding: 20px 0;
+    transition: all 0.5s ease;
+
+	&__active {
+		left: -225px;
+	  }
+
+    &__profile {
+      margin-bottom: 30px;
+      text-align: center;
+
+      img {
+        display: block;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 0 auto;
+      }
+
+      h3 {
+        color: #ffffff;
+        margin: 10px 0 5px;
+      }
+
+      p {
+        color: rgb(206, 240, 253);
+        font-size: 14px;
+      }
+    }
+
+    ul li a {
+      display: block;
+      padding: 13px 30px;
+      border-bottom: 1px solid #10558d;
+      color: rgb(241, 237, 237);
+      font-size: 16px;
+      position: relative;
+    }
+
+    ul li a &__icon {
+      color: #dee4ec;
+      width: 30px;
+      display: inline-block;
+    }
+
+    ul li a:hover,
+    ul li a &__active {
+      color: #0c7db1;
+
+      background: white;
+      border-right: 2px solid rgb(5, 68, 104);
+    }
+
+    ul li a:hover &__active,
+    ul li a &__active &__icon {
+      color: #0c7db1;
+    }
+
+    ul li a:hover:before,
+    ul li a &__active:before {
+      display: block;
+    }
+  }
+
+  &__section {
+    width: calc(100% - 225px);
+    margin-left: 225px;
+    transition: all 0.5s ease;
+
+	&__active {
+		margin-left: 0;
+		width: 100%;
+	  }
+
+    &__top_navbar {
+      background: rgb(7, 105, 185);
+      height: 50px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+
+      &__hamburger a {
+        font-size: 28px;
+        color: #f4fbff;
+
+        a:hover {
+          color: #a2ecff;
+        }
+      }
+    }
+  }
+}

@@ -2,13 +2,11 @@
 @import url('./styles/font.css');
 @import url('./styles/_variaveis.css');
 
-
 * {
     scrollbar-width: thin !important;
     scrollbar-color: #65676a #1e1f22 !important;
   }
   
-  /* Works on Chrome, Edge, and Safari */
   *::-webkit-scrollbar {
     width: 1.1rem !important;
     height: 1.2rem !important;

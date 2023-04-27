@@ -1,0 +1,228 @@
+@import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
+
+.wrapper {
+  &__sidebar {
+    background: rgb(7, 105, 185);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 225px;
+    height: 100%;
+    padding: 20px 0;
+    transition: all 0.5s ease;
+
+    &__active {
+      left: -225px;
+    }
+
+    &__profile {
+      text-align: center;
+
+      i::before {
+        content: url("../../assets/icons_side/logo_eatery.svg");
+        display: block;
+        height: 10rem;
+        width: 10rem;
+        margin: 0 auto;
+      }
+
+      h3 {
+        color: #ffffff;
+        margin-top: 3.5rem;
+      }
+
+      p {
+        color: rgb(206, 240, 253);
+        font-size: 14px;
+      }
+    }
+
+    ul li a {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 13px 30px;
+      border-bottom: 1px solid #10558d;
+      color: rgb(241, 237, 237);
+      font-size: 16px;
+      position: relative;
+      text-decoration: none;
+    }
+
+    ul li a &__icon {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+
+    [data-icon="lounge"]{
+      content: url("../../assets/icons_side/table.svg");
+    }
+
+    [data-icon="open"]{
+      content: url("../../assets/icons_side/open.svg");
+    }
+
+    [data-icon="close"]{
+      content: url("../../assets/icons_side/close.svg");
+    }
+
+    [data-icon="register"]{
+      content: url("../../assets/icons_side/register.svg");
+    }
+
+    [data-icon="menu"]{
+      content: url("../../assets/icons_side/menu.svg");
+    }
+
+    ul li a:hover {
+      color: #0c7db1;
+      background: white;
+      border-right: 2px solid rgb(5, 68, 104);
+
+      [data-icon="lounge"]{
+        content: url("../../assets/icons_side/table_active.svg");
+      }
+
+      [data-icon="open"]{
+        content: url("../../assets/icons_side/open_active.svg");
+      }
+
+      [data-icon="close"]{
+        content: url("../../assets/icons_side/close_active.svg");
+      }
+
+      [data-icon="register"]{
+        content: url("../../assets/icons_side/register_active.svg");
+      }
+
+      [data-icon="menu"]{
+        content: url("../../assets/icons_side/menu_active.svg");
+      }
+  
+    }
+
+  }
+
+  &__section {
+    width: calc(100% - 225px);
+    margin-left: 225px;
+    transition: all 0.5s ease;
+
+    &__active {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    &__top_navbar {
+      background: rgb(7, 105, 185);
+      height: 50px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+
+      &__btn {
+        position: relative;
+        width: 34px;
+        height: 34px;
+        top: 0;
+        left: 0px;
+        cursor: pointer;
+      }
+    
+      &__btn_left {
+        background-color: white;
+        position: absolute;
+        height: 5px;
+        width: 17px;
+        top: 14px;
+        left: 0px;
+        -webkit-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+      }
+    
+      &__btn_left:before {
+        background-color: white;
+        position: absolute;
+        height: 5px;
+        width: 17px;
+        content: "";
+        top: -14px;
+        -webkit-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+      }
+      &__btn_left:after {
+        background-color: white;
+        position: absolute;
+        height: 5px;
+        width: 17px;
+        content: "";
+        top: 14px;
+        -webkit-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+      }
+    
+      &__btn_right {
+        background-color: white;
+        position: absolute;
+        height: 5px;
+        width: 17px;
+        top: 14px;
+        left: 17px;
+        -webkit-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+      }
+      &__btn_right:before {
+        background-color: white;
+        position: absolute;
+        height: 5px;
+        width: 17px;
+        content: "";
+        top: -14px;
+        -webkit-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+      }
+      &__btn_right:after {
+        background-color: white;
+        position: absolute;
+        height: 5px;
+        width: 17px;
+        content: "";
+        top: 14px;
+        -webkit-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+      }
+    
+      &__active &__btn_left {
+        -webkit-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+        background: transparent;
+      }
+      &__active &__btn_left:before {
+        -webkit-transform: rotateZ(45deg) scaleX(1.4) translate(4px, 4px);
+        transform: rotateZ(45deg) scaleX(1.4) translate(4px, 4px);
+        background-color: red;
+      }
+      &__active &__btn_left:after {
+        -webkit-transform: rotateZ(-45deg) scaleX(1.4) translate(4px, -4px);
+        transform: rotateZ(-45deg) scaleX(1.4) translate(4px, -4px);
+        background-color: red;
+      }
+      &__active &__btn_right {
+        -webkit-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+        background: transparent;
+      }
+      &__active &__btn_right:before {
+        -webkit-transform: rotateZ(-45deg) scaleX(1.4) translate(-4px, 4px);
+        transform: rotateZ(-45deg) scaleX(1.4) translate(-4px, 4px);
+        background-color: red;
+      }
+      &__active &__btn_right:after {
+        -webkit-transform: rotateZ(45deg) scaleX(1.4) translate(-4px, -4px);
+        transform: rotateZ(45deg) scaleX(1.4) translate(-4px, -4px);
+        background-color: red;
+      }
+    }
+  }
+}
+ 
