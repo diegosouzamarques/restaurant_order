@@ -1,12 +1,10 @@
-import { Outlet, matchPath, useParams, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, matchPath, useParams, useLocation } from "react-router-dom";
 import style from "./DefaultPage.module.scss";
-import Button from "../../Components/Button/Button";
 import MenuHambuger from "../../Components/MenuHambuger/MenuHambuger";
 
 const DefaultPage = () => {
   let { id } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
 
   let btnBackHide = Boolean(matchPath(location.pathname, "/"));
 
@@ -30,20 +28,8 @@ const DefaultPage = () => {
 
   return (
     <>
-     <MenuHambuger />
+     <MenuHambuger title={returnTitle(id)} btnBackHide={btnBackHide}/>
      <div className={style.container}>
-      <header className={style.container__header}>
-      <Button type="button"
-             children={"< Voltar"}
-             nipple="item"
-             hidde={btnBackHide}
-             onClick={() => {
-               navigate(-1);
-             }}/>                    
-        <h1 className={style.container__header__titulo}>
-          Eatery - {returnTitle(id)}
-        </h1>
-      </header>
       <div className={style.container__outlet}>
          <Outlet/> 
       </div>

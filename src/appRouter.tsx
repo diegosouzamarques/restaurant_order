@@ -7,7 +7,6 @@ import CloseOrder from "./Pages/CloseOrder/CloseOrder";
 import DisheDrinksRegister from "./Pages/DisheDrinksRegister/DisheDrinksRegister";
 import NotFound from "./Pages/NotFound/NotFound";
 import DefaultPage from "./Pages/DefaultPage/DefaultPage";
-import Humbuger from "./Pages/Hambuger/Humbuger";
 
 const AppRouter = () => {
   return (
@@ -17,8 +16,8 @@ const AppRouter = () => {
           <Route index element={<Lounge />}></Route>
           <Route path="order" element={<Order />}></Route>
           <Route path="menu" element={<MenuItem />}></Route>
-          <Route path="detail/:id" element={<DisheDrinkDetails />}></Route>
-          <Route path="close/:id" element={<CloseOrder />}></Route>
+          <Route path="detail/:id?" element={<DisheDrinkDetails />}></Route>
+          <Route path="close/:id?" element={<CloseOrder />}></Route>
           <Route path="register" element={<DisheDrinksRegister />}></Route>          
         </Route>
         <Route path="*" element={<NotFound />} />

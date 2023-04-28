@@ -1,18 +1,45 @@
 import style from "./MenuHambuger.module.scss";
 import classNames from "classnames";
-import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const MenuHambuger = () => {
+interface IMenuHambuger {
+  title?: string;
+  btnBackHide: boolean;
+}
+
+const MenuHambuger = ({ ...props }: IMenuHambuger) => {
   const [active, setActive] = useState(true);
+  const navigate = useNavigate();
 
-  const hambugerClick: React.MouseEventHandler<HTMLDivElement> = (
-    event: React.MouseEvent<HTMLDivElement>
-  ) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    window.addEventListener("scroll", listenToScroll);
+    return () => window.removeEventListener("scroll", listenToScroll);
+  }, []);
+
+  const listenToScroll = () => {
+    let heightToHideFrom = 15;
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+
+    if (winScroll > heightToHideFrom) {
+      isVisible && setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+  };
+
+  const hambugerClick: React.MouseEventHandler<
+    HTMLDivElement | HTMLAnchorElement
+  > = (event: React.MouseEvent<HTMLDivElement>) => {
     setActive(!active);
   };
 
   return (
-    <div className={style.wrapper}>
+    <header className={style.wrapper}>
+      {isVisible && <h1 className={style.wrapper__titulo}>{props.title}</h1>}
       <div
         className={classNames({
           [style.wrapper__section]: true,
@@ -32,6 +59,18 @@ const MenuHambuger = () => {
               className={style.wrapper__section__top_navbar__btn_right}
             ></div>
           </div>
+          <div
+            className={classNames({
+              [style.wrapper__section__top_navbar__btn_back]: true,
+              [style.wrapper__section__top_navbar__btn_back__hidde]:
+                props.btnBackHide,
+            })}
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            <span>{"< Voltar"}</span>
+          </div>
         </div>
       </div>
       <div
@@ -41,44 +80,50 @@ const MenuHambuger = () => {
         })}
       >
         <div className={style.wrapper__sidebar__profile}>
-           <i/> 
+          <i />
           <h3>Manager Eatery</h3>
           <p>Fast Work</p>
         </div>
         <ul>
           <li>
-            <a href="#">          
-                <i className={style.wrapper__sidebar__icon} data-icon="lounge"></i>
+            <Link to="/" onClick={hambugerClick}>
+              <i
+                className={style.wrapper__sidebar__icon}
+                data-icon="lounge"
+              ></i>
               <span>Lounge</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to="/order" onClick={hambugerClick}>
               <i className={style.wrapper__sidebar__icon} data-icon="open"></i>
               <span>Open Order</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
-               <i className={style.wrapper__sidebar__icon} data-icon="close"></i>
+            <Link to="/close" onClick={hambugerClick}>
+              <i className={style.wrapper__sidebar__icon} data-icon="close"></i>
               <span>Close Order</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">             
-              <i className={style.wrapper__sidebar__icon} data-icon="register"></i>
+            <Link to="/register" onClick={hambugerClick}>
+              <i
+                className={style.wrapper__sidebar__icon}
+                data-icon="register"
+              ></i>
               <span>Dishe & Drink</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to="/menu" onClick={hambugerClick}>
               <i className={style.wrapper__sidebar__icon} data-icon="menu"></i>
               <span>Items Menu</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
-    </div>
+    </header>
   );
 };
 
