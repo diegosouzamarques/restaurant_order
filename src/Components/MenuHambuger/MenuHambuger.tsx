@@ -80,7 +80,9 @@ const MenuHambuger = ({ ...props }: IMenuHambuger) => {
         })}
       >
         <div className={style.wrapper__sidebar__profile}>
-          <i />
+          <Link to="/" onClick={hambugerClick}>
+            <i />
+          </Link>
           <h3>Manager Eatery</h3>
           <p>Fast Work</p>
         </div>
