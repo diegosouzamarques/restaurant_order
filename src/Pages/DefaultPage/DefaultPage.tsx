@@ -29,10 +29,8 @@ const DefaultPage = () => {
   return (
     <>
      <MenuHambuger title={returnTitle(id)} btnBackHide={btnBackHide}/>
-     <div className={style.container}>
-      <div className={style.container__outlet}>
+      <div className={style.outlet}>
          <Outlet/> 
-      </div>
     </div> 
     </>
 

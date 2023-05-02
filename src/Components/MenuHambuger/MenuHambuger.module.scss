@@ -1,4 +1,7 @@
 .wrapper {
+  position: relative;
+  z-index: 999;
+
   &__titulo{
     display: inline-grid;
     align-content: center;

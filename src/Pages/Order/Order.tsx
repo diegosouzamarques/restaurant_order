@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Button from "../../Components/Button/Button";
 import InputDefault from "../../Components/Inputs/InputDefault/InputDefault";
 import Select from "../../Components/Inputs/Select/Select";
@@ -7,9 +8,23 @@ import ItemOrder from "../../Type/Item";
 import Option from "../../Type/Option";
 import style from "./Order.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import MenuItem from "../../Components/MenuItem/MenuItem";
+import cardapio from "../../assets/data/dados.json";
+import Amount from "../../Components/Amount/Amount";
 
 const Order = () => {
   const navigate = useNavigate();
+  const [menu, setMenu] = useState(false);
+  const [showAmount, setShowAmount] = useState(false);
+  const [itemOrder, setItemOrder] = useState<ItemOrder>();
+  const [items, setItems] = useState<ItemOrder[]> (
+    [
+      { title: "Chocolate Quente", qtd: 3, valor: 15.37 },
+      { title: "X-Tudão", qtd: 3, valor: 75.78 },
+      { title: "Batata Cheddar", qtd: 1, valor: 5.67 }
+    ]
+  );
 
   const opcoes: Option[] = [
     { id: -1, name: "Escolha uma mesa" },
@@ -17,43 +32,82 @@ const Order = () => {
     { id: 2, name: "Mesa 02" },
     { id: 3, name: "Mesa 03" },
   ];
-  const items: ItemOrder[] = [
-    { title: "Chocolate Quente", qtd: 3, valor: 15.37 },
-    { title: "X-Tudão", qtd: 3, valor: 75.78 },
-    { title: "Batata Cheddar", qtd: 1, valor: 5.67 },
-  ];
+
+
+  useEffect(() => {
+    console.log("useEffect "+JSON.stringify(itemOrder));
+  }, [itemOrder]);
+
+  const addItem = ()=>{
+    setItems(itemOrder?items.concat(itemOrder):items);
+  }
+
+  const setValue = (value: string)=>{
+    console.log("setValue "+value);
+    setItemOrder({title: itemOrder?.title??"", qtd:Number(value), valor: Number(itemOrder?.valor)});
+  };
+
+  const clickItem = (event: React.MouseEvent<HTMLDivElement>) => {
+    let id = Number(event.currentTarget.getAttribute("data-id"));
+    let prato = cardapio.find((element) => element.id === id) ?? null;
+    setItemOrder({title: prato?.title??"", qtd:0, valor: Number(prato?.price)})
+    setMenu(false);
+    setShowAmount(true);
+  };
+
   return (
     <>
-      <section className={style.container}>
-        <InputDefault
-          id="requester"
-          title="Solicitante"
-          type="text"
-        ></InputDefault>
-        <Select
-          id="table"
-          title="Mesa"
-          options={opcoes}
-          selectedValue={opcoes[0]}
-        ></Select>
-        <TextArea
-          id="note"
-          title="Observação"
-          placeholder="Observação"
-          maxCharacter={350}
-        ></TextArea>
+      <Amount show={showAmount} itemOrder={itemOrder} toChange={setValue} addItem={addItem}></Amount>
+      <MenuItem show={menu} onClick={clickItem}></MenuItem>
+      <section
+        className={classNames({
+          [style.container]: true,
+          [style.container__visible]: menu,
+        })}
+      >
         <Button
-          className={style.container__btn}
-          type="button"
-          nipple="item"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate("/menu");
-          }}
+          type="submit"
+          nipple="order"
+          className={style.container__btn_Salvar}
         >
-          Escolha Prato & Bebida
+          Gravar
         </Button>
-        <ListItem items={items}></ListItem>
+        <div className={style.container__fields}>
+          <div>
+            <InputDefault
+              id="requester"
+              title="Solicitante"
+              type="text"
+            ></InputDefault>
+            <Select
+              id="table"
+              title="Mesa"
+              options={opcoes}
+              selectedValue={opcoes[0]}
+            ></Select>
+            <TextArea
+              id="note"
+              title="Observação"
+              placeholder="Observação"
+              maxCharacter={350}
+            ></TextArea>
+          </div>
+          <div>
+            <Button
+              className={style.container__fields__btn}
+              type="button"
+              nipple="item"
+              onClick={(e) => {
+                e.preventDefault();
+                setMenu(true);
+                setShowAmount(false);
+              }}
+            >
+              Escolha Prato & Bebida
+            </Button>
+            <ListItem items={items}></ListItem>
+          </div>
+        </div>
       </section>
     </>
   );

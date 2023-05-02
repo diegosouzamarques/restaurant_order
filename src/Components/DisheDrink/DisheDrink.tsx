@@ -1,48 +1,48 @@
 import style from "./DisheDrink.module.scss";
 import { useNavigate } from "react-router-dom";
 import Carousel from "../../Components/Carousel/Carousel";
-
-import napolitana from "../../assets/img/Pizza napolitana.png";
-import scaled from "../../assets/img/DSF5019-6-scaled.jpg";
-import imgExemplo from "../../assets/img/images.jpg";
 import Imagem from "../../Type/Image";
+import DisheDrinkType from "../../Type/DisheDrink";
 
-const DisheDrink = () => {
+interface propsDisheDrink {
+  onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
+  dishe:DisheDrinkType;
+}
+
+const DisheDrink = ({...props}:propsDisheDrink) => {
   const navigate = useNavigate();
 
-  const imagens: Imagem[] = [
-    { src: napolitana, alt: "Photo Upload" },
-    { src: scaled, alt: "Photo Upload" },
-    { src: imgExemplo, alt: "Photo Upload" },
-  ];
+  const imagens: Imagem[] = [];
 
   return (
-    <article className={style.dishe} >
-      <div className={style.dishe__photos}>
-        <Carousel></Carousel>
-      </div>
-      <div className={style.dishe__content} onClick={(e) => {
-      e.preventDefault();
-      navigate("/detail/10");
-    }}>
-        <h1 className={style.dishe__content__title}>Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita Pizza Marguerita</h1>
-        <p className={style.dishe__content__descript}>
-          Vale ressaltar que o selo de “pizza napolitana” compreende duas
-          variedades: a marguerita (feita com muçarela, azeite, manjericão e
-          molho de tomate) e a marinara (feita com alho, azeite, tomate e
-          orégano)
-          Vale ressaltar que o selo de “pizza napolitana” compreende duas
-          variedades: a marguerita (feita com muçarela, azeite, manjericão e
-          molho de tomate) e a marinara (feita com alho, azeite, tomate e
-          orégano)
-        </p>
+    <article className={style.dishe}>
+      <Carousel></Carousel>
+      <div className={style.dishe__content}>
+        <div data-id={props.dishe.id} className={style.dishe__content__select}  onClick={props.onClick}>
+          <h1 className={style.dishe__content__title}>
+           {props.dishe.title}
+          </h1>
+          <p className={style.dishe__content__descript}>
+          {props.dishe.descript}
+          </p>
+        </div>
+
+        <span
+          className={style.dishe__content__details}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/detail/10");
+          }}
+        >
+          Details...
+        </span>
         <div className={style.dishe__content__type}>
-          <span>Italia</span>
-          <span>Seco</span>
+          <span> {props.dishe.origem}</span>
+          <span> {props.dishe.type}</span>
         </div>
         <div className={style.dishe__content__type}>
-          <span className={style.dishe__content__price}>$ 85.36</span>
-          <span>8 pedaços</span>
+          <span className={style.dishe__content__price}>$ {props.dishe.price}</span>
+          <span>{props.dishe.volume}</span>
         </div>
       </div>
     </article>

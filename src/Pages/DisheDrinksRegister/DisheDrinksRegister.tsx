@@ -146,10 +146,7 @@ const DisheDrinksRegister = () => {
         </div>
 
       </div>
-      <div className={classNames({[style.container__photos]: true,
-                                  [style.container__photos__visible]: imagens?imagens?.length > 0 : false })}>
-         <Carousel imagens={imagens}></Carousel>
-      </div>
+        <Carousel imagens={imagens}></Carousel>
     </section>
   );
 };

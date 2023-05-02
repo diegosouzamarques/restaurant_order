@@ -17,15 +17,16 @@ const ListItem = ({ ...props }: IListItem) => {
       <ul className={style.list_item__content}>
         {props.items.map((item, index) => (
           <li key={index}>
-            <span>{item.title}</span>
+            <span className={style.list_item__content__title} >{item.title}</span>
             <span>{item.qtd}</span>
           </li>
         ))}
-        <li>
+{/*         <li>
           <span>Total</span>
           <span>$ {total.toFixed(2)}</span>
-        </li>
+        </li> */}
       </ul>
+      <div className={style.list_item__total}><span>Total</span> <span>$ {total.toFixed(2)}</span></div>
     </div>
   );
 };
