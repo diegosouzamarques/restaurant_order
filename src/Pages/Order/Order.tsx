@@ -8,7 +8,7 @@ import ItemOrder from "../../Type/Item";
 import Option from "../../Type/Option";
 import style from "./Order.module.scss";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import MenuItem from "../../Components/MenuItem/MenuItem";
 import cardapio from "../../assets/data/dados.json";
 import Amount from "../../Components/Amount/Amount";
@@ -33,17 +33,15 @@ const Order = () => {
     { id: 3, name: "Mesa 03" },
   ];
 
-
-  useEffect(() => {
-    console.log("useEffect "+JSON.stringify(itemOrder));
-  }, [itemOrder]);
-
   const addItem = ()=>{
     setItems(itemOrder?items.concat(itemOrder):items);
   }
 
+  const onBack = () => {
+    setMenu(false);
+  }
+
   const setValue = (value: string)=>{
-    console.log("setValue "+value);
     setItemOrder({title: itemOrder?.title??"", qtd:Number(value), valor: Number(itemOrder?.valor)});
   };
 
@@ -58,7 +56,7 @@ const Order = () => {
   return (
     <>
       <Amount show={showAmount} itemOrder={itemOrder} toChange={setValue} addItem={addItem}></Amount>
-      <MenuItem show={menu} onClick={clickItem}></MenuItem>
+      <MenuItem show={menu} onClick={clickItem} onBack={onBack}></MenuItem>
       <section
         className={classNames({
           [style.container]: true,

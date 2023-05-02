@@ -1,7 +1,7 @@
 import style from "./MenuHambuger.module.scss";
 import classNames from "classnames";
 import { useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface IMenuHambuger {
   title?: string;
@@ -11,10 +11,21 @@ interface IMenuHambuger {
 const MenuHambuger = ({ ...props }: IMenuHambuger) => {
   const [active, setActive] = useState(true);
   const navigate = useNavigate();
-
   const [isVisible, setIsVisible] = useState(true);
 
+  const back_navigate = () => {
+    navigate("/");
+  }
+
   useEffect(() => {
+
+    let back_btn = document.getElementById('button_back');
+    console.log(back_btn);
+
+    if(back_btn){
+      back_btn.onclick = back_navigate;
+    }
+
     window.addEventListener("scroll", listenToScroll);
     return () => window.removeEventListener("scroll", listenToScroll);
   }, []);
@@ -59,15 +70,12 @@ const MenuHambuger = ({ ...props }: IMenuHambuger) => {
               className={style.wrapper__section__top_navbar__btn_right}
             ></div>
           </div>
-          <div
+          <div id="button_back"
             className={classNames({
               [style.wrapper__section__top_navbar__btn_back]: true,
               [style.wrapper__section__top_navbar__btn_back__hidde]:
                 props.btnBackHide,
             })}
-            onClick={() => {
-              navigate(-1);
-            }}
           >
             <span>{"< Voltar"}</span>
           </div>

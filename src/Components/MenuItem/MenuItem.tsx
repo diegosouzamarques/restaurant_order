@@ -10,6 +10,7 @@ import DisheDrinkType from "../../Type/DisheDrink";
 
 interface propsMenuItem {
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
+  onBack?: ()=>void;
   show: boolean;
 }
 
@@ -20,16 +21,28 @@ const MenuItem = ({...props}:propsMenuItem) => {
   const [active, setActive] = useState(-1);
   const [pratos, setPratos] = useState<DisheDrinkType[]>([]);
 
+  const back_navigate = () => {
+    navigate("/");
+  }
+
   const clickCategoria = (event: React.MouseEvent<HTMLLIElement>) => {
     setActive(Number(event.currentTarget.id));
     setPratos([...cardapio]);
   };
 
-  useEffect(() => {    
+  useEffect(() => {   
+    let button_back = document.getElementById('button_back');
+    if((button_back) && props.onBack) button_back.onclick = props.onBack;
+
+
     if(!props.show){
       setActive(-1);
       setPratos([]);
+
+      if(button_back) button_back.onclick = back_navigate;
+    
     }
+
     }, [props.show]);
 
   return (

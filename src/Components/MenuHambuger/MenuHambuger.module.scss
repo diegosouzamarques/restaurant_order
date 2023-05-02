@@ -143,6 +143,11 @@
         position: relative;
         cursor: pointer;
 
+        &:focus, &:hover{
+          color: orange; 
+          font-weight: bold;
+        }
+
         &__hidde{
           display: none;
         }

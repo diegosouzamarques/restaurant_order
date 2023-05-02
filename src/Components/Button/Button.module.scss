@@ -1,5 +1,5 @@
 .button {
-    padding: 1rem 1.5rem;
+    padding: 1rem 1rem;
     color: #ffffff;
     border-radius: 5px;
     font-size: 1.5rem;
@@ -20,5 +20,9 @@
 
     &__item{
       background: rgb(65, 85, 199);
+    }
+
+     &:focus, &:hover{
+      background: orange; 
     }
   }

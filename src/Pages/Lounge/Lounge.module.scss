@@ -19,6 +19,10 @@
     padding: 0 .5rem;
     margin: 0 .3rem;
 
+    &:focus, &:hover{
+      background-color: orange; 
+    }
+
     &__open{
         background-color: #28a745;
     }
