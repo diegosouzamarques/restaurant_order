@@ -42,7 +42,7 @@ const CloseOrder = () => {
   ];
 
   return (
-    <div className={style.close}>
+/*     <div className={style.close}>
       <section className={style.close__container}>
         <div className={style.close__container__order}>
           <Select
@@ -58,7 +58,7 @@ const CloseOrder = () => {
           ></Text>
         </div>
         <div>
-          <ListItem items={items}></ListItem>
+          <ListItem items={items} close={false}></ListItem>
         </div>
         <div className={style.close__container__payment}>
           <Select
@@ -124,7 +124,74 @@ const CloseOrder = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </div>  */
+<>
+<div className={style.container}>
+          <Button type="button" nipple="order" className={style.container__btn_pay}>
+            Pagamento
+          </Button>
+        <div className={style.container__payment_details}>
+          <h3 className={classNames(style.container__payment_details__title)}>Pagamentos:</h3>
+          <ul>
+            <li>
+              <span>Pix</span> <span>150</span>
+            </li>
+            <li>
+              <span>Cartão Crédito</span> <span>350</span>
+            </li>
+            <li>
+              <span>Cartão Débito</span> <span>185</span>
+            </li>
+            <li>
+              <span>Dinheiro</span> <span>147</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className={style.container__payment_details}>
+          <h3 className={style.container__payment_details__title}>Desconto: </h3>
+          <ul>
+            <li>
+              <span>Valor</span> <span>150</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className={style.container__payment_details}>
+          <h3 className={classNames(style.container__payment_details__title)}>Total a Pagar: </h3>
+          <ul>
+            <li>
+              <span>A Pagar</span> <span>150</span>
+            </li>
+            <li>
+              <span>Pagamentos</span> <span>50</span>
+            </li>
+            <li>
+              <span>Restante</span> <span>50</span>
+            </li>
+          </ul>
+        </div>
+</div> 
+
+<div className={style.details_order}>
+<Select
+            id="table"
+            title="Mesa"
+            options={opcoes}
+            selectedValue={opcoes[0]}
+          ></Select>
+          <Text title="Solicitante" text="Maria Marques"></Text>
+          <Text
+            title="Observação"
+            text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate."
+          ></Text>
+</div>
+
+<ListItem items={items} close={true}></ListItem>
+</>
+
+
+
   );
 };
 

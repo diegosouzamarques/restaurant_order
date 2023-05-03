@@ -1,15 +1,26 @@
-.list_item{
+.list_item {
   width: 25vw;
 
-  &__title{
+  &__close {
+    height: calc(100vh - 120px);
+    float: right;
+    margin-right: .5px;
+  }
+
+  &__title {
     display: flex;
     justify-content: space-between;
     font-size: 24px;
-    background: rgb(65, 85, 199);
+    background: rgb(7, 105, 185);
     color: white;
     padding: 5px 10px;
     border-top-left-radius: 5px;
-    border-top-right-radius: 5px;  
+    border-top-right-radius: 5px;
+
+    &__close {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+    }
   }
 
   &__content {
@@ -19,32 +30,39 @@
     font-weight: 400;
     border: 1px solid black;
 
+    &__close {
+      min-height: 100%;
+    }
+
     &__title {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
     }
 
-    & li{
+    & li {
       padding: 5px;
       margin: 15px 10px;
       border-bottom: 1px solid black;
       display: flex;
       justify-content: space-between;
     }
-  
   }
-  
-  &__total{
+
+  &__total {
     display: flex;
     justify-content: space-between;
     font-size: 24px;
-    background: rgb(65, 85, 199);
+    background: rgb(7, 105, 185);
     color: white;
     padding: 5px 10px;
     border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;  
+    border-bottom-right-radius: 5px;
     margin-bottom: 1rem;
-  }
 
+    &__close {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+  }
 }

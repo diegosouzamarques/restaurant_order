@@ -103,7 +103,7 @@ const Order = () => {
             >
               Escolha Prato & Bebida
             </Button>
-            <ListItem items={items}></ListItem>
+            <ListItem items={items} close={false}></ListItem>
           </div>
         </div>
       </section>

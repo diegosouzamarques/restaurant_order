@@ -1,4 +1,7 @@
-.close{
+/* .close{
+
+
+
     margin: 0 5rem;
     &__title{
         text-align: center;
@@ -62,4 +65,47 @@
 
 
     }
+} */
+
+
+.container{
+    position: absolute;
+    width: 100vw;
+    text-align: center;
+
+    &__btn_pay{
+        margin-bottom: 2rem;
+        width: 25%;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border: 0px;
+    }
+
+    &__payment_details{
+        width: 25%;
+        margin: 0 auto;
+        & li{
+            display: flex;
+            justify-content: space-between;
+            margin: .8rem 0;
+            font-size: 18px;
+            font-weight: 400;
+            border-bottom: 1px solid black;
+        
+        }
+    
+        &__title{
+            background: #28a745;
+            color: white;
+            padding: .5rem 0;
+            border-radius: 5px;
+            font-size: 22px;
+            font-weight: 400;
+          }
+    }
 }
+
+.details_order{
+    float: left;
+}
+

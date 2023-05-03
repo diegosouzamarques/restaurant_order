@@ -1,8 +1,10 @@
 import style from "./ListItem.module.scss";
 import ItemOrder from "../../Type/Item";
+import classNames from "classnames";
 
 interface IListItem {
   items: Array<ItemOrder>;
+  close: boolean;
 }
 
 const ListItem = ({ ...props }: IListItem) => {
@@ -12,21 +14,17 @@ const ListItem = ({ ...props }: IListItem) => {
   }, 0);
 
   return (
-    <div className={style.list_item}>
-      <div className={style.list_item__title}><span>Item</span> <span>Qtd</span></div>
-      <ul className={style.list_item__content}>
+    <div className={classNames({[style.list_item]:true,[style.list_item__close]: props.close})}>
+      <div className={classNames({[style.list_item__title]:true, [style.list_item__title__close]: props.close}) }><span>Item</span> <span>Qtd</span></div>
+      <ul className={classNames({[style.list_item__content]:true, [style.list_item__content__close]: props.close})}>
         {props.items.map((item, index) => (
           <li key={index}>
             <span className={style.list_item__content__title} >{item.title}</span>
             <span>{item.qtd}</span>
           </li>
         ))}
-{/*         <li>
-          <span>Total</span>
-          <span>$ {total.toFixed(2)}</span>
-        </li> */}
       </ul>
-      <div className={style.list_item__total}><span>Total</span> <span>$ {total.toFixed(2)}</span></div>
+      <div className={classNames({[style.list_item__total]:true, [style.list_item__total__close]: props.close})}><span>Total</span> <span>$ {total.toFixed(2)}</span></div>
     </div>
   );
 };
