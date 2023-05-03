@@ -24,7 +24,7 @@ const Carousel = ({ ...props }: ICarrousel) => {
     >
       <Flickity options={flickityOptions}>
         {props.imagens?.map((photo, index) => (
-          <img
+          <img className={style.carrousel__photos__size} 
             key={index}
             src={URL.createObjectURL(photo)}
           />

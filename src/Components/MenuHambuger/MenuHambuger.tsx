@@ -18,9 +18,7 @@ const MenuHambuger = ({ ...props }: IMenuHambuger) => {
   }
 
   useEffect(() => {
-
     let back_btn = document.getElementById('button_back');
-    console.log(back_btn);
 
     if(back_btn){
       back_btn.onclick = back_navigate;

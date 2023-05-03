@@ -4,8 +4,12 @@
     flex-direction: column;
 
     &__btn_Salvar{
-        width: 25%; 
-        margin: 2rem auto;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        width: 25%;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border: 0px;
     }
 
     &__visible{

@@ -18,7 +18,6 @@ const InputDefault = ({ ...props }: IInputDefault) => {
   const [valid, setValid] = useState(true);
 
   const toChanger = (evento: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("InputDefault "+evento.target.value);
     if (props.type === "number" && (evento.target.value.includes('.'))){
       let test = evento.target.value.substring(evento.target.value.indexOf('.')+1, evento.target.value.length);
       if(test.length > 2)

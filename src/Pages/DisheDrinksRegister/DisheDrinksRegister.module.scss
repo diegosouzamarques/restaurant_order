@@ -5,7 +5,9 @@
     
     &__btn_Salvar{
         width: 25%;
-        margin: 10px;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border: 0px;
     }
 
     &__fields{
@@ -17,4 +19,9 @@
             display: none;
         }
     }
+
+    &__carousel{
+       margin-top: 1rem; 
+       width: 100%;
+    } 
 }

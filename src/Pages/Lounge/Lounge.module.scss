@@ -18,6 +18,8 @@
     cursor: pointer;
     padding: 0 .5rem;
     margin: 0 .3rem;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 
     &:focus, &:hover{
       background-color: orange; 

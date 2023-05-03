@@ -6,13 +6,14 @@
         &__visible{
           display: block;
         }
+
+        &__size{
+            border-radius: 5px;
+            width: 25vw;
+            height: auto;
+            object-fit: cover;
+            margin-left: 1rem;
+        }
      }
-    
-    img{
-        border-radius: 5px;
-        width: 34vw;
-        height: 20vw;
-        margin-left: 1rem;
-    }
-    
+        
 }

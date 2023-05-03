@@ -6,20 +6,20 @@ import Select from "../../Components/Inputs/Select/Select";
 import TextArea from "../../Components/Inputs/TextArea/TextArea";
 import Option from "../../Type/Option";
 import style from "./DisheDrinksRegister.module.scss";
-import { useState, useEffect  } from "react";
+import { useState, useEffect } from "react";
 import Carousel from "../../Components/Carousel/Carousel";
 import { IDisheDrink } from "../../Interface/IDisheDrink";
 import { useNavigate } from "react-router-dom";
 
-const DisheDrinksRegister = () => { 
+const DisheDrinksRegister = () => {
   const navigate = useNavigate();
-  
+
   const optionKind: Option[] = [
-    { id:"", name: "Escolha um gênero" },
+    { id: "", name: "Escolha um gênero" },
     { id: 1, name: "Prato" },
     { id: 2, name: "Bebida" },
   ];
-  
+
   const [kind, setKind] = useState(0);
   const [message, setMessage] = useState("");
 
@@ -28,11 +28,10 @@ const DisheDrinksRegister = () => {
   const [origin, setOrigin] = useState("");
   const [type, setType] = useState("");
   const [volume, setVolume] = useState("");
-  const [price, setPrice] = useState("");                                         
+  const [price, setPrice] = useState("");
   const [imagens, setImagens] = useState<File[]>();
 
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   const submeterForm = () => {
     try {
@@ -43,13 +42,11 @@ const DisheDrinksRegister = () => {
         descript,
         origin,
         type,
-        volume:Number(volume),
-        price:Number(price)
+        volume: Number(volume),
+        price: Number(price),
       };
-
-
     } catch (error) {
-      let e = error  as Error;
+      let e = error as Error;
       setMessage(e.message);
     }
   };
@@ -64,14 +61,16 @@ const DisheDrinksRegister = () => {
         Gravar
       </Button>
       <div className={style.container__fields}>
-    
         <div>
           <Select
             id="kind"
             title="Gênero"
             options={optionKind}
             selectedValue={optionKind[0]}
-            toChange={(value) => {let i = Number(value); setKind(i)}}
+            toChange={(value) => {
+              let i = Number(value);
+              setKind(i);
+            }}
             required
           ></Select>
 
@@ -91,16 +90,15 @@ const DisheDrinksRegister = () => {
             required
             value={descript}
             toChange={(value) => setDescript(value)}
-          ></TextArea> 
-      
+          ></TextArea>
         </div>
-                
+
         <div>
           <InputDefault
             id="price"
             type="number"
             title="Preço"
-            maxCharacter={10}            
+            maxCharacter={10}
             value={price}
             toChange={(value) => setPrice(value)}
             required
@@ -110,15 +108,19 @@ const DisheDrinksRegister = () => {
             id="file"
             title="Escolha Imagem"
             toChange={(value) => {
-              (imagens) 
-       ? setImagens(prevState => [value!, ...prevState! ])
-       : setImagens([value!]);
+              imagens
+                ? setImagens((prevState) => [value!, ...prevState!])
+                : setImagens([value!]);
             }}
             accept=".png, .jpg, .jpeg"
-          ></InputFile> 
-        </div> 
+          ></InputFile>
+        </div>
 
-        <div className={classNames({[style.container__fields__drink]:kind !== 2})}>
+        <div
+          className={classNames({
+            [style.container__fields__drink]: kind !== 2,
+          })}
+        >
           <InputDefault
             id="origin"
             type="text"
@@ -144,9 +146,10 @@ const DisheDrinksRegister = () => {
             toChange={(value) => setVolume(value)}
           ></InputDefault>
         </div>
-
       </div>
+      <div className={style.container__carousel}>
         <Carousel imagens={imagens}></Carousel>
+      </div>
     </section>
   );
 };

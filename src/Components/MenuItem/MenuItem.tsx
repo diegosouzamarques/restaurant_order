@@ -10,12 +10,11 @@ import DisheDrinkType from "../../Type/DisheDrink";
 
 interface propsMenuItem {
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
-  onBack?: ()=>void;
+  onBack?: () => void;
   show: boolean;
 }
 
-const MenuItem = ({...props}:propsMenuItem) => {
-
+const MenuItem = ({ ...props }: propsMenuItem) => {
   const navigate = useNavigate();
   let menuOption = Object.values(CategoryMenu);
   const [active, setActive] = useState(-1);
@@ -23,30 +22,27 @@ const MenuItem = ({...props}:propsMenuItem) => {
 
   const back_navigate = () => {
     navigate("/");
-  }
+  };
 
   const clickCategoria = (event: React.MouseEvent<HTMLLIElement>) => {
     setActive(Number(event.currentTarget.id));
     setPratos([...cardapio]);
   };
 
-  useEffect(() => {   
-    let button_back = document.getElementById('button_back');
-    if((button_back) && props.onBack) button_back.onclick = props.onBack;
+  useEffect(() => {
+    let button_back = document.getElementById("button_back");
+    if (button_back && props.onBack) button_back.onclick = props.onBack;
 
-
-    if(!props.show){
+    if (!props.show) {
       setActive(-1);
       setPratos([]);
 
-      if(button_back) button_back.onclick = back_navigate;
-    
+      if (button_back) button_back.onclick = back_navigate;
     }
-
-    }, [props.show]);
+  }, [props.show]);
 
   return (
-    <div className={classNames({[style.visible]: !props.show})}>
+    <div className={classNames({ [style.visible]: !props.show })}>
       <div className={style.menu}>
         <ul className={style.menu__option}>
           {menuOption.map((item, index) => {
@@ -85,11 +81,17 @@ const MenuItem = ({...props}:propsMenuItem) => {
           <span>{menuOption[active]}</span>
         </h1>
       </div>
-      {pratos.length <= 0 &&  <div className={style.categoria}><img/></div>}
+      {pratos.length <= 0 && (
+        <div className={style.categoria}>
+          <img />
+        </div>
+      )}
       {pratos.length > 0 && (
         <div className={style.container}>
           {pratos.map((item, index) => (
-            <DisheDrink dishe={item} key={index} onClick={props.onClick}/>
+            <div className={style.container__item}>
+              <DisheDrink dishe={item} key={index} onClick={props.onClick} cardMode={true} />
+            </div>
           ))}
         </div>
       )}
