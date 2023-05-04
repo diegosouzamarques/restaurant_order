@@ -1,7 +1,7 @@
 import Option from "../../../Type/Option";
 import style from "./Select.module.scss";
 import classNames from "classnames";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 
 interface ISelect {
   toChange?: (value: string) => void;
@@ -13,7 +13,7 @@ interface ISelect {
   required?: boolean | undefined;
 }
 
-const Select = ({ ...props }: ISelect) => {
+const Select = forwardRef(({ ...props }: ISelect, ref?:React.ForwardedRef<HTMLSelectElement>) => {
   const [valid, setValid] = useState(true);
 
   const toChanger = (evento: React.ChangeEvent<HTMLSelectElement>) => {
@@ -39,6 +39,7 @@ const Select = ({ ...props }: ISelect) => {
   return (
     <label htmlFor={props.id} className={style.input__title}>
       <select
+        ref={ref}
         id={props.id}
         defaultValue={props.selectedValue?.id}
         value={props.value}
@@ -67,6 +68,6 @@ const Select = ({ ...props }: ISelect) => {
       </span>
     </label>
   );
-};
-
+}
+); 
 export default Select;

@@ -16,7 +16,6 @@ const DisheDrinkDetails = () => {
 
   useEffect(() => {
     let achou = cardapio.find((element) => element.id === Number(id));
-    console.log(achou);
     if (achou)
       setPrato({
         id: Number(achou.id),

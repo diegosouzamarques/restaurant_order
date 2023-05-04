@@ -35,6 +35,7 @@ const Order = () => {
 
   const addItem = ()=>{
     setItems(itemOrder?items.concat(itemOrder):items);
+    setShowAmount(false);
   }
 
   const onBack = () => {

@@ -102,7 +102,6 @@ const DisheDrinksRegister = () => {
             value={price}
             toChange={(value) => setPrice(value)}
             required
-            min={0.01}
           ></InputDefault>
           <InputFile
             id="file"

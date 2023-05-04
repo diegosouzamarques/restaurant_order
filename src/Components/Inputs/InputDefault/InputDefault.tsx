@@ -11,11 +11,16 @@ interface IInputDefault {
   maxCharacter?: number;
   msgError?: string;
   required?: boolean | undefined;
-  min?: string | number;
+  onlyPositiveNumber?: boolean | undefined;
 }
 
 const InputDefault = ({ ...props }: IInputDefault) => {
   const [valid, setValid] = useState(true);
+
+  const onKeyDown = (evento: React.KeyboardEvent<HTMLInputElement>)=>{
+    if(props.onlyPositiveNumber && (evento.key==="-"))
+       evento.preventDefault(); 
+  };
 
   const toChanger = (evento: React.ChangeEvent<HTMLInputElement>) => {
     if (props.type === "number" && (evento.target.value.includes('.'))){
@@ -24,12 +29,11 @@ const InputDefault = ({ ...props }: IInputDefault) => {
       return;
     } 
 
-    if (props.toChange) props.toChange(evento.target.value);
-    
+    if (props.toChange) props.toChange(evento.target.value); 
   };
 
   const onInvalid = (evento: React.FormEvent<HTMLInputElement>) => {
-    evento.preventDefault();
+    evento.preventDefault();   
     setValid(evento.currentTarget.validity.valid);
   };
 
@@ -40,14 +44,6 @@ const InputDefault = ({ ...props }: IInputDefault) => {
 
   const onBlur = (evento: React.FocusEvent<HTMLInputElement>) => {
     evento.preventDefault();
-    if (props.type === "number" && (evento.target.value.length > 0)){
-      
-      let num = Number(evento.target.value);
-      let min = Number(props.min);
-      setValid((num > min));
-
-      return;
-    } 
     setValid(evento.currentTarget.validity.valid);
   };
 
@@ -65,7 +61,7 @@ const InputDefault = ({ ...props }: IInputDefault) => {
         onInvalid={onInvalid}
         onInput={onInput}
         onBlur={onBlur}
-        min={props.min}
+        onKeyDown = {onKeyDown}
       />
       <span className={style.input__title__input__label}>{props.title}</span>
       <span

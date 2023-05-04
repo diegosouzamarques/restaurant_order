@@ -23,7 +23,7 @@ const Amount = ({ ...props }: propsAmount) => {
     }
   }
 
-  const clickAmount = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const clickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
     closeDialog();
   };
 
@@ -50,7 +50,6 @@ const Amount = ({ ...props }: propsAmount) => {
           id="amount"
           title="Amount"
           type="number"
-          min={1}
           required
           value={String(
             props.itemOrder?.qtd && props.itemOrder?.qtd > 0
@@ -70,7 +69,7 @@ const Amount = ({ ...props }: propsAmount) => {
           <Button
             type="button"
             nipple="shut"
-            onClick={clickAmount}
+            onClick={clickCancel}
             className={style.btns__size}
           >
             Cancel
