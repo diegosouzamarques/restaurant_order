@@ -3,33 +3,23 @@
     justify-content: space-between;
     width: 100vw;
     height: calc(100vh - 50px);
-    box-sizing: border-box;
-
-
     &__details_order{
-        // float: left;
         width: 100%;
-        background-color: antiquewhite;
         padding-left: .5rem;
      }
    
-
     &__payment{
         display: flex;
         flex-direction: column;
         width: 100%;
-        background-color: aquamarine;
         max-height: calc(100vh - 50px);
-        box-sizing: border-box;
 
         &__cashier{
-            background-color: bisque;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             flex-grow: 2;
             max-height: calc(100vh - 142px);
-            box-sizing: border-box;
 
             &__item_1{
                 flex-grow: 2;
@@ -101,8 +91,6 @@
 
     &__items{
         width: 100%;
-        background-color: gray;
-        padding-right: .5rem;
     }
 
 }

@@ -63,36 +63,6 @@ const CloseOrder = () => {
     }
   }, [payMade, discount, pay]);
 
-  let array: PaymentMade[] = [
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-    { id: 1, name: "Dinheiro", value: 150.68 },
-  ];
   const cashierResume = () => {
     setPay(
       payMade.reduce((counter, item) => {
@@ -104,7 +74,7 @@ const CloseOrder = () => {
       return counter + item.value;
     }, 0);
 
-    setRest(total + discountTotal - pay);
+    setRest(total - (discountTotal + pay));
   };
 
   const opcoes: Option[] = [
@@ -115,12 +85,10 @@ const CloseOrder = () => {
   ];
 
   const addItem = (pay: PaymentMade) => {
-    setPayMade(array);
-    setDiscount(array);
-    /*     if (pay) {
+    if (pay) {
       if (pay.id === 5) setDiscount([...discount, pay]);
       else setPayMade([...payMade, pay]);
-    } */
+    }
     setShowPayment(false);
   };
 
