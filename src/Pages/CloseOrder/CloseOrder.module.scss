@@ -1,41 +1,111 @@
 .container{
-    position: absolute;
+    display: flex;
+    justify-content: space-between;
     width: 100vw;
-    text-align: center;
+    height: calc(100vh - 50px);
+    box-sizing: border-box;
 
-    &__btn_pay{
-        margin-bottom: 2rem;
-        width: 25%;
-        border-top-right-radius: 0px;
-        border-top-left-radius: 0px;
-        border: 0px;
-    }
 
-    &__payment_details{
-        width: 25%;
-        margin: 0 auto;
-        & li{
+    &__details_order{
+        // float: left;
+        width: 100%;
+        background-color: antiquewhite;
+        padding-left: .5rem;
+     }
+   
+
+    &__payment{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: aquamarine;
+        max-height: calc(100vh - 50px);
+        box-sizing: border-box;
+
+        &__cashier{
+            background-color: bisque;
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            margin: .8rem 0;
-            font-size: 18px;
-            font-weight: 400;
-            border-bottom: 1px solid black;
+            flex-grow: 2;
+            max-height: calc(100vh - 142px);
+            box-sizing: border-box;
+
+            &__item_1{
+                flex-grow: 2;
+                overflow-y: hidden;
+                max-height: 100%;
+                & ul{
+                    overflow-y: auto;
+                    max-height: 100%;
+                }
+            }
+
+            &__item_2{
+                flex-grow: 2;
+                overflow-y: hidden;
+                    max-height: 100%;
+                & ul{
+                    overflow-y: auto;
+                    max-height: 100%;
+                }
+            }
+
+            &__item_3{
+                flex-grow: 0;
+            }
+        }
+
+        &__btn_pay{
+            margin-bottom: 2rem;
+            border-top-right-radius: 0px;
+            border-top-left-radius: 0px;
+            border: 0px;
+            width: 100%;
+        }
+
+        &__details{
+
+
+            & li{
+                display: flex;
+                justify-content: space-between;
+                margin: .8rem 0;
+                font-size: 18px;
+                font-weight: 400;
+                border-bottom: 1px solid black;
+            
+            }
+        
+            &__title{
+                background: #28a745;
+                color: white;
+                padding: .5rem 0;
+                border-radius: 5px;
+                font-size: 22px;
+                font-weight: 400;
+              }
+    
+            &__items_pay{       
+                overflow-y: auto;
+                max-height: 100%;
+            }  
+    
+            &__items_discont{       
+                overflow-y: auto;
+                max-height: 100%;
+            } 
         
         }
-    
-        &__title{
-            background: #28a745;
-            color: white;
-            padding: .5rem 0;
-            border-radius: 5px;
-            font-size: 22px;
-            font-weight: 400;
-          }
     }
+
+    &__items{
+        width: 100%;
+        background-color: gray;
+        padding-right: .5rem;
+    }
+
 }
 
-.details_order{
-    float: left;
-}
+
 
