@@ -129,7 +129,7 @@ const CloseOrder = () => {
           </Button>
           <div className={style.container__payment__cashier}>
 
-            <div className={style.container__payment__details +" "+style.container__payment__cashier__item_1}>
+            <div className={classNames(style.container__payment__details, style.container__payment__cashier__item_1)}>
               <h3
                 className={classNames(style.container__payment__details__title)}
               >
@@ -156,9 +156,9 @@ const CloseOrder = () => {
               </ul>
             </div>
 
-            <div className={style.container__payment__details +" "+style.container__payment__cashier__item_2}>
+            <div className={classNames(style.container__payment__details, style.container__payment__cashier__item_2)}>
               <h3 className={style.container__payment__details__title}>
-                Desconto:{" "}
+                Desconto:
               </h3>
               {discount.length <= 0 && (
                 <>
@@ -181,7 +181,7 @@ const CloseOrder = () => {
               </ul>
             </div>
 
-            <div className={style.container__payment__details +" "+style.container__payment__cashier__item_3}>
+            <div className={classNames(style.container__payment__details, style.container__payment__cashier__item_3)}>
               <h3
                 className={classNames(style.container__payment__details__title)}
               >

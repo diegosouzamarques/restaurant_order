@@ -1,5 +1,5 @@
 :root {
---gradient_occupied : linear-gradient(to bottom, white, #faf2f2, #f4e8e8, #e9cbcb, #e9c3c3);
+ --gradient_occupied : linear-gradient(to bottom, white, #ffe6e6, #ffcccc, #ffb3b3, #ff9999); 
 --border_occupied: red;
 --status_occupied: red;
 --status_occupied_text: underline red;
