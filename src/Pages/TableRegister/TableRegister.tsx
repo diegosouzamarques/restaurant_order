@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../Components/Button/Button";
 import InputDefault from "../../Components/Inputs/InputDefault/InputDefault";
 import style from "./TableRegister.module.scss";
-import useRegisterTable from "../../State/Hooks/useRegisterTable";
+import useRegisterTable from "../../State/Hooks/Table/useRegisterTable";
 
 const TableRegister = () => {
     const [title, setTitle] = useState("");

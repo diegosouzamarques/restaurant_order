@@ -1,4 +1,5 @@
 import { KindDisheDrink } from "../Enum/KindDisheDrink";
+import DisheDrinkBussines from "../State/Bussines/DisheDrinkBussines";
 
 export class DisheDrink {
   readonly id: number | undefined;
@@ -11,8 +12,8 @@ export class DisheDrink {
   readonly price: number;
 
   constructor(
-    id = undefined,
-    kind = KindDisheDrink.Dishe,
+    id: number | undefined,
+    kind: KindDisheDrink,
     title = "",
     descript = "",
     origin = "",
@@ -20,6 +21,14 @@ export class DisheDrink {
     volume = "",
     price = 0
   ) {
+    DisheDrinkBussines(id,
+      kind,
+      title,
+      descript,
+      origin,
+      type,
+      volume,
+      price);
     this.id = id;
     this.kind = kind;
     this.title = title;

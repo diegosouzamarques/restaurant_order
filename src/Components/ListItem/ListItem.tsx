@@ -1,16 +1,16 @@
 import style from "./ListItem.module.scss";
-import ItemOrder from "../../Type/Item";
 import classNames from "classnames";
+import { OrderItem } from "../../Model/OrderItem";
 
-interface IListItem {
-  items: Array<ItemOrder>;
+type IListItem = {
+  items: Array<OrderItem>;
   close: boolean;
 }
 
 const ListItem = ({ ...props }: IListItem) => {
   let total: number = 0;
   total = props.items.reduce((counter, item) => {
-    return counter + item.qtd * item.valor;
+    return counter + item.quantity * item.price;
   }, 0);
 
   return (
@@ -20,7 +20,7 @@ const ListItem = ({ ...props }: IListItem) => {
         {props.items.map((item, index) => (
           <li key={index}>
             <span className={style.list_item__content__title} >{item.title}</span>
-            <span>{item.qtd}</span>
+            <span>{item.quantity}</span>
           </li>
         ))}
       </ul>

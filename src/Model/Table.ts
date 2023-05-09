@@ -1,13 +1,13 @@
 import { TableStatus } from "../Enum/TableStatus";
 import TableBussines from "../State/Bussines/TableBussines";
-import { Oder } from "./Oder";
+import { Order } from "./Order";
 
 export class Table {
   readonly id: number | undefined;
   readonly title: string;
   readonly amountPeople: number;
   readonly status: TableStatus;
-  readonly order: Oder | undefined;
+  readonly order: Order | undefined;
 
   constructor(
     id: number | undefined,

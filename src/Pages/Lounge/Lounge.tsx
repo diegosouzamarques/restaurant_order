@@ -2,7 +2,7 @@ import style from "./Lounge.module.scss";
 import Table from "../../Components/Table/Table";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
-import useListTable from "../../State/Hooks/useListTable";
+import useListTable from "../../State/Hooks/Table/useListTable";
 
 const Lounge = () => {
   const navigate = useNavigate();

@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 import Button from "../Button/Button";
-import ItemOrder from "../../Type/Item";
 import Text from "../Text/Text";
 import InputDefault from "../Inputs/InputDefault/InputDefault";
 import style from "./Amount.module.scss";
+import { OrderItem } from "../../Model/OrderItem";
 
-interface propsAmount {
+type propsAmount = {
   show: boolean;
-  itemOrder: ItemOrder | undefined;
+  itemOrder: OrderItem | undefined;
   toChange?: (value: string) => void;
   addItem: () => void;
 }
@@ -52,8 +52,8 @@ const Amount = ({ ...props }: propsAmount) => {
           type="number"
           required
           value={String(
-            props.itemOrder?.qtd && props.itemOrder?.qtd > 0
-              ? props.itemOrder?.qtd
+            props.itemOrder?.quantity && props.itemOrder?.quantity > 0
+              ? props.itemOrder?.quantity
               : ""
           )}
           toChange={props.toChange}

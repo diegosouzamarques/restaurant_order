@@ -5,9 +5,8 @@ import classNames from "classnames";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import cardapio from "../../assets/data/dados.json";
 import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
-import useListDisheDrink from "../../State/Hooks/useListDisheDrink";
+import useListDisheDrink from "../../State/Hooks/DisheDrink/useListDisheDrink";
 
 interface propsMenuItem {
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;

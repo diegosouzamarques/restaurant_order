@@ -3,13 +3,14 @@ import style from "./CloseOrder.module.scss";
 import Option from "../../Type/Option";
 import Select from "../../Components/Inputs/Select/Select";
 import Text from "../../Components/Text/Text";
-import ItemOrder from "../../Type/Item";
 import ListItem from "../../Components/ListItem/ListItem";
 import Button from "../../Components/Button/Button";
 import classNames from "classnames";
 import Payment from "../../Components/Payment/Payment";
 import { useEffect, useState } from "react";
 import PaymentMade from "../../Type/PaymentMade";
+import { OrderItem } from "../../Model/OrderItem";
+import useListTable from "../../State/Hooks/Table/useListTable"; 
 
 const CloseOrder = () => {
   const { id } = useParams();
@@ -20,42 +21,46 @@ const CloseOrder = () => {
   const [total, setTotal] = useState(0);
   const [pay, setPay] = useState(0);
   const [rest, setRest] = useState(0);
+  const listTable = useListTable();
 
-  const items: ItemOrder[] = [
-    { title: "Chocolate Quente", qtd: 3, valor: 15.37 },
-    { title: "X-Tudão", qtd: 3, valor: 75.78 },
-    { title: "Batata Cheddar", qtd: 1, valor: 5.67 },
-    { title: "Cachorro Quente", qtd: 3, valor: 18.0 },
-    { title: "X-Salada", qtd: 3, valor: 65.0 },
-    { title: "Milk Shake", qtd: 1, valor: 8.32 },
-    { title: "Churros Doce Leite", qtd: 1, valor: 5.67 },
-    { title: "Coxinha Frango", qtd: 3, valor: 18.0 },
-    { title: "Misto Quente", qtd: 3, valor: 65.0 },
-    { title: "Sorvete Napolitano", qtd: 1, valor: 8.89 },
-
-    { title: "Chocolate Quente", qtd: 3, valor: 15.37 },
-    { title: "X-Tudão", qtd: 3, valor: 75.78 },
-    { title: "Batata Cheddar", qtd: 1, valor: 5.67 },
-    { title: "Cachorro Quente", qtd: 3, valor: 18.0 },
-    { title: "X-Salada", qtd: 3, valor: 65.0 },
-    { title: "Milk Shake", qtd: 1, valor: 8.32 },
-    { title: "Churros Doce Leite", qtd: 1, valor: 5.67 },
-    { title: "Coxinha Frango", qtd: 3, valor: 18.0 },
-    { title: "Misto Quente", qtd: 3, valor: 65.0 },
-    { title: "Sorvete Napolitano", qtd: 1, valor: 8.89 },
-  ];
+  const [items, setItems] = useState<OrderItem[]>([
+    {
+      id: 1,
+      disheDrinkId: 1,
+      orderId: 10,
+      title: "Chocolate Quente",
+      quantity: 3,
+      price: 15.37,
+    },
+    {
+      id: 1,
+      disheDrinkId: 1,
+      orderId: 10,
+      title: "X-Tudão",
+      quantity: 3,
+      price: 75.78,
+    },
+    {
+      id: 1,
+      disheDrinkId: 1,
+      orderId: 10,
+      title: "Batata Cheddar",
+      quantity: 3,
+      price: 5.67,
+    },
+  ]);
 
   useEffect(() => {
     if (payMade.length <= 0 && discount.length <= 0) {
       setTotal(
         items.reduce((counter, item) => {
-          return counter + item.qtd * item.valor;
+          return counter + item.quantity * item.price;
         }, 0)
       );
 
       setRest(
         items.reduce((counter, item) => {
-          return counter + item.qtd * item.valor;
+          return counter + item.quantity * item.price;
         }, 0)
       );
     } else {
@@ -77,12 +82,11 @@ const CloseOrder = () => {
     setRest(total - (discountTotal + pay));
   };
 
-  const opcoes: Option[] = [
-    { id: -1, name: "Escolha uma mesa" },
-    { id: 1, name: "Mesa 01" },
-    { id: 2, name: "Mesa 02" },
-    { id: 3, name: "Mesa 03" },
+  let opcoes: Option[] = [
+    { id: -1, name: "Escolha uma mesa" }
   ];
+
+  listTable.map((item)=>{opcoes.push({ id: Number(item.id), name: item.title })});
 
   const addItem = (pay: PaymentMade) => {
     if (pay) {

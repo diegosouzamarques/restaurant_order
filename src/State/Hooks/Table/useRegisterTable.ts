@@ -1,7 +1,7 @@
-import { TableStatus } from "../../Enum/TableStatus";
-import { Tables } from "../Atom/Tables";
+import { TableStatus } from "../../../Enum/TableStatus";
+import { Tables } from "../../Atom/Tables";
 import { useSetRecoilState } from "recoil";
-import { Table } from "../../Model/Table";
+import { Table } from "../../../Model/Table";
 
 const useRegisterTable = () => {
   const setListTable = useSetRecoilState<Table[]>(Tables);

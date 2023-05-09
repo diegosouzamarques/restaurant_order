@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import Carousel from "../../Components/Carousel/Carousel";
 import { useNavigate } from "react-router-dom";
 import { DisheDrink } from "../../Model/DisheDrink";
+import useRegisterDisheDrink from "../../State/Hooks/DisheDrink/useRegisterDisheDrink";
 
 const DisheDrinksRegister = () => {
   const navigate = useNavigate();
@@ -30,22 +31,25 @@ const DisheDrinksRegister = () => {
   const [volume, setVolume] = useState("");
   const [price, setPrice] = useState("");
   const [imagens, setImagens] = useState<File[]>();
+  const registerDisheDrink = useRegisterDisheDrink();
 
   useEffect(() => {}, []);
 
-  const submeterForm = () => {
-    try {
+  const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
+    evento.preventDefault();
 
-      const disheDrink = new DisheDrink(undefined, kind, title, descript, origin, type, volume, Number(price));
+    try {
+      registerDisheDrink(110, kind, title, descript, origin, type, volume, Number(price));
 
     } catch (error) {
       let e = error as Error;
       setMessage(e.message);
-    }
-  };
+    }    
+}
+
 
   return (
-    <section className={style.container}>
+    <form onSubmit={aoSalvar} className={style.container}>
       <Button
         type="submit"
         nipple="order"
@@ -142,7 +146,7 @@ const DisheDrinksRegister = () => {
       <div className={style.container__carousel}>
         <Carousel imagens={imagens}></Carousel>
       </div>
-    </section>
+    </form>
   );
 };
 export default DisheDrinksRegister;

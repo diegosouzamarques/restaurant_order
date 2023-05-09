@@ -1,14 +1,15 @@
 import { atom } from "recoil";
 import { TableStatus } from "../../Enum/TableStatus";
 import { Table } from "../../Model/Table";
-import { Oder } from "../../Model/Oder";
+import { Order } from "../../Model/Order";
 
 const now = new Date();
-let ped = new Oder(10, 1, "Maria Marques", "TESTE TESTE", now, [
+let ped = new Order(10, 1, "Maria Marques", "TESTE TESTE", now, [
     {
      id: 1,
      disheDrinkId: 1,
-     oderId: 10,
+     orderId: 10,
+     title:"Pizza Marguerita",
      quantity: 3,
      price: 10.50
     }

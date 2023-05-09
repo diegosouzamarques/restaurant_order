@@ -1,4 +1,4 @@
-import { Tables } from "../Atom/Tables";
+import { Tables } from "../../Atom/Tables";
 import { useRecoilValue } from "recoil";
 
 const useListTable = () => {
