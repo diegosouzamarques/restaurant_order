@@ -8,8 +8,8 @@ import Option from "../../Type/Option";
 import style from "./DisheDrinksRegister.module.scss";
 import { useState, useEffect } from "react";
 import Carousel from "../../Components/Carousel/Carousel";
-import { IDisheDrink } from "../../Interface/IDisheDrink";
 import { useNavigate } from "react-router-dom";
+import { DisheDrink } from "../../Model/DisheDrink";
 
 const DisheDrinksRegister = () => {
   const navigate = useNavigate();
@@ -35,16 +35,9 @@ const DisheDrinksRegister = () => {
 
   const submeterForm = () => {
     try {
-      const resgiter: IDisheDrink = {
-        id: undefined,
-        kind,
-        title,
-        descript,
-        origin,
-        type,
-        volume: Number(volume),
-        price: Number(price),
-      };
+
+      const disheDrink = new DisheDrink(undefined, kind, title, descript, origin, type, volume, Number(price));
+
     } catch (error) {
       let e = error as Error;
       setMessage(e.message);

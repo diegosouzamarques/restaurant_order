@@ -86,6 +86,10 @@
       content: url("../../assets/icons_side/menu.svg");
     }
 
+    [data-icon="regtable"]{
+      content: url("../../assets/icons_side/table_dinner.svg");
+    }
+
     ul li a:hover {
       color: #0c7db1;
       background: white;
@@ -109,6 +113,10 @@
 
       [data-icon="menu"]{
         content: url("../../assets/icons_side/menu_active.svg");
+      }
+
+      [data-icon="regtable"]{
+        content: url("../../assets/icons_side/table_dinner_active.svg");
       }
   
     }

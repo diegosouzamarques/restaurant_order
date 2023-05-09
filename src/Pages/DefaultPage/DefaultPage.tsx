@@ -17,6 +17,7 @@ const DefaultPage = () => {
       { path: `/menu`, title: "Menu" },
       { path: `/detail/${id}`, title: "Details" },
       { path: `/close/${id}`, title: "Close Order" },
+      { path: `/regtable`, title: "Register Table" },
     ];
 
     const result = routes.filter((obj) => {

@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import cardapio from "../../assets/data/dados.json";
-import DisheDrinkType from "../../Type/DisheDrink";
+import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
+import useListDisheDrink from "../../State/Hooks/useListDisheDrink";
 
 interface propsMenuItem {
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
@@ -18,7 +19,9 @@ const MenuItem = ({ ...props }: propsMenuItem) => {
   const navigate = useNavigate();
   let menuOption = Object.values(CategoryMenu);
   const [active, setActive] = useState(-1);
-  const [pratos, setPratos] = useState<DisheDrinkType[]>([]);
+  const [pratos, setPratos] = useState<DisheDrinkModel[]>([]);
+
+  const listDishe = useListDisheDrink();
 
   const back_navigate = () => {
     navigate("/");
@@ -26,7 +29,7 @@ const MenuItem = ({ ...props }: propsMenuItem) => {
 
   const clickCategoria = (event: React.MouseEvent<HTMLLIElement>) => {
     setActive(Number(event.currentTarget.id));
-    setPratos([...cardapio]);
+    setPratos([...listDishe]);
   };
 
   useEffect(() => {

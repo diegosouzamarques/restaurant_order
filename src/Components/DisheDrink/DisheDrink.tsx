@@ -2,12 +2,12 @@ import style from "./DisheDrink.module.scss";
 import { useNavigate } from "react-router-dom";
 import Carousel from "../../Components/Carousel/Carousel";
 import Imagem from "../../Type/Image";
-import DisheDrinkType from "../../Type/DisheDrink";
 import classNames from "classnames";
+import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
 
 interface propsDisheDrink {
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
-  dishe: DisheDrinkType;
+  dishe: DisheDrinkModel;
   cardMode: boolean;
 }
 
@@ -56,7 +56,7 @@ const DisheDrink = ({ ...props }: propsDisheDrink) => {
         )}
 
         <div className={style.dishe__content__type}>
-          <span> {props.dishe.origem}</span>
+          <span> {props.dishe.origin}</span>
           <span> {props.dishe.type}</span>
         </div>
         <div className={style.dishe__content__type}>

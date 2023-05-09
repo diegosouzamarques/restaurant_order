@@ -124,6 +124,15 @@ const MenuHambuger = ({ ...props }: IMenuHambuger) => {
             </Link>
           </li>
           <li>
+            <Link to="/regtable" onClick={hambugerClick}>
+              <i
+                className={style.wrapper__sidebar__icon}
+                data-icon="regtable"
+              ></i>
+              <span>Table</span>
+            </Link>
+          </li>          
+          <li>
             <Link to="/menu" onClick={hambugerClick}>
               <i className={style.wrapper__sidebar__icon} data-icon="menu"></i>
               <span>Items Menu</span>
