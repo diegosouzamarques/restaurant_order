@@ -1,64 +1,25 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 import { TableStatus } from "../../Enum/TableStatus";
 import { Table } from "../../Model/Table";
 import { Order } from "../../Model/Order";
-
-const now = new Date();
-let ped = new Order(10, 1, "Maria Marques", "TESTE TESTE", now, [
-    {
-     id: 1,
-     disheDrinkId: 1,
-     orderId: 10,
-     title:"Pizza Marguerita",
-     quantity: 3,
-     price: 10.50
-    }
-]);
+import RepoApi from "../../Service/ApiConfig";
+import ResponseApi from "../../Type/ResponseApi";
 
 export const Tables = atom<Table[]>({
     key:"tables",
-    default:[
-        {
-            id: 1,
-            title:"MESA 01",
-            order:ped, 
-            amountPeople: 2,
-            status: TableStatus.occupied,
-        },
-        {
-            id: 2,
-            title:"MESA 02",
-            order:ped, 
-            amountPeople: 2,
-            status: TableStatus.unavailable, 
-        },
-        {
-            id: 3,
-            title:"MESA 03",
-            order:ped, 
-            amountPeople: 2,
-            status: TableStatus.dirty,
-        },
-        {
-            id: 4,
-            title:"MESA 04",
-            order:ped, 
-            amountPeople: 0,
-            status: TableStatus.available, 
-        },
-        {
-            id: 5,
-            title:"MESA 05",
-            order:ped, 
-            amountPeople: 0,
-            status: TableStatus.available,
-        },
-        {
-            id: 6,
-            title:"MESA 06",
-            order:ped, 
-            amountPeople: 0,
-            status: TableStatus.available, 
+    default: selector({
+        key: 'tables/initial',
+        get: async () => {
+            const response = (await RepoApi.get<ResponseApi<Table[]>>('/Table')).data;
+            let rs = response.data;
+         
+            rs.map(table => {                
+                table.status = Object.values(TableStatus).find((i)=> {return i === table.status})??TableStatus.available; 
+                if(table.order){
+                    table.order = new Order(table.order.id, table.order.tableId, table.order.requester, table.order.note, undefined, undefined, table.order.amount);         
+                }                
+            });           
+          return rs;
         }
-    ]
+      })
 });

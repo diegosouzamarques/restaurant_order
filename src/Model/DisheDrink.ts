@@ -2,7 +2,7 @@ import { KindDisheDrink } from "../Enum/KindDisheDrink";
 import DisheDrinkBussines from "../State/Bussines/DisheDrinkBussines";
 
 export class DisheDrink {
-  readonly id: number | undefined;
+  id: number | undefined;
   readonly kind: KindDisheDrink;
   readonly title: string;
   readonly descript: string;

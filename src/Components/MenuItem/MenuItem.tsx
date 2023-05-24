@@ -9,7 +9,7 @@ import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
 import useListDisheDrink from "../../State/Hooks/DisheDrink/useListDisheDrink";
 
 interface propsMenuItem {
-  onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
+  onSelected?: (selected :DisheDrinkModel) => void;
   onBack?: () => void;
   show: boolean;
 }
@@ -21,10 +21,6 @@ const MenuItem = ({ ...props }: propsMenuItem) => {
   const [pratos, setPratos] = useState<DisheDrinkModel[]>([]);
 
   const listDishe = useListDisheDrink();
-
-  const back_navigate = () => {
-    navigate("/");
-  };
 
   const clickCategoria = (event: React.MouseEvent<HTMLLIElement>) => {
     setActive(Number(event.currentTarget.id));
@@ -38,10 +34,14 @@ const MenuItem = ({ ...props }: propsMenuItem) => {
     if (!props.show) {
       setActive(-1);
       setPratos([]);
-
-      if (button_back) button_back.onclick = back_navigate;
     }
   }, [props.show]);
+
+  const clickItem = (event: React.MouseEvent<HTMLDivElement>) => {
+    let id = Number(event.currentTarget.getAttribute("data-id"));
+    let prato = listDishe.find((element) => element.id === id);
+    if(props.onSelected && prato)props.onSelected(prato);
+  };
 
   return (
     <div className={classNames({ [style.visible]: !props.show })}>
@@ -87,16 +87,21 @@ const MenuItem = ({ ...props }: propsMenuItem) => {
         <div className={style.categoria}>
           <img />
         </div>
-      )}
-      {pratos.length > 0 && (
-        <div className={style.container}>
-          {pratos.map((item, index) => (
-            <div className={style.container__item}>
-              <DisheDrink dishe={item} key={index} onClick={props.onClick} cardMode={true} />
-            </div>
-          ))}
-        </div>
-      )}
+      )}     
+        {pratos.length > 0 && (
+          <div className={style.container}>
+            {pratos.map((item, index) => (
+              <div key={index} className={style.container__item}>
+                <DisheDrink
+                  dishe={item}
+                  key={index}
+                  onClick={clickItem}
+                  cardMode={true}
+                />
+              </div>
+            ))}
+          </div>
+        )}
     </div>
   );
 };

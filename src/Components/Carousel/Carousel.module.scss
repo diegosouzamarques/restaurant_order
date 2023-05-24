@@ -1,19 +1,74 @@
-.carrousel{
-    &__photos{
-        display: none;
-        width: 100%;
-    
-        &__visible{
-          display: block;
-        }
+.carousel {
+  position: relative;
+  width: 100%;
 
-        &__size{
-            border-radius: 5px;
-            width: 25vw;
-            height: auto;
-            object-fit: cover;
-            margin-left: 1rem;
+  &__btn {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+
+   &:hover {
+      transform: scale(1.15);
+    }
+
+    &__left {
+      left: 0;
+      &::before {
+        display: block;
+        height: 3rem;
+        width: 3rem;
+        content: url("../../assets/carousel/arrow_prev.svg");
+      }
+    }
+  
+    &__right {
+      right: 0;
+      &::before {
+        display: block;
+        height: 3rem;
+        width: 3rem;
+        content: url("../../assets/carousel/arrow_next.svg");
+      }
+    }
+
+    &__visible{
+      display: block;
+    }
+  }
+
+  &__slides {
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+
+    &__items {
+      display: flex;
+      width: 200%;
+      box-sizing: border-box;
+
+      &__empty{
+        content: url("../../assets/carousel/empty_gallary.svg");
+      }
+
+      &__item {
+        width: 50%;
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        transition: all 0.7s;
+        color: white;
+
+        &__size {
+          height: 100%;
+          -o-object-fit: contain;
+          object-fit: contain;
+          width: auto;
         }
-     }
-        
+      }
+    }
+  }
 }

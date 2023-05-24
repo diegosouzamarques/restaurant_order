@@ -1,9 +1,10 @@
 import style from "./DisheDrink.module.scss";
 import { useNavigate } from "react-router-dom";
 import Carousel from "../../Components/Carousel/Carousel";
-import Imagem from "../../Type/Image";
 import classNames from "classnames";
 import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
+import { getListImage, downloadImage } from "../../Service/DisheDrinkApi";
+import { useEffect, useState } from "react";
 
 interface propsDisheDrink {
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
@@ -13,12 +14,31 @@ interface propsDisheDrink {
 
 const DisheDrink = ({ ...props }: propsDisheDrink) => {
   const navigate = useNavigate();
+  const [imagens, setImagens] = useState<File[]>([]);
 
-  const imagens: Imagem[] = [];
+  const getImages = () => {
+    if (props.dishe.id) {
+      getListImage(props.dishe.id)
+        .then((res) => {
+          res.forEach((i) => {
+            downloadImage(i.id).then((foto) => {
+              if (foto) {
+                setImagens((prevState) => [foto!, ...prevState!]);
+              }
+            });
+          });
+        })
+        .catch(console.log);
+    }
+  };
+
+  useEffect(() => {
+    getImages();
+  }, []);
 
   return (
     <article className={style.dishe}>
-      <Carousel></Carousel>
+      <Carousel id={String(props.dishe.id)} imagens={imagens}></Carousel>
       <div className={style.dishe__content}>
         <div
           data-id={props.dishe.id}

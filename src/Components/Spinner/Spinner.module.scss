@@ -1,0 +1,68 @@
+.spinner {
+    text-align: center;
+
+    &__header {
+        min-height: calc(100vh - 50px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(10px + 2vmin);
+        color: #0c7db1;
+
+        &__dotwrapper {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        
+            &__loading {
+                margin: 0 5px;
+                font-size: 2rem;
+              }
+              
+              &__dot0 {
+                background-color: #0c7db1;
+                border-radius: 50%;
+                width: 15px;
+                height: 15px;
+                margin: 0 5px;
+                animation: BounceAnimation 0.5s linear infinite;
+                animation-delay: 0;
+              }
+              
+              &__dot1 {
+                background-color: #0c7db1;
+                border-radius: 50%;
+                width: 15px;
+                height: 15px;
+                margin: 0 5px;
+                animation: BounceAnimation 0.5s linear infinite;
+                animation-delay: 0.1s;
+              }
+              
+              &__dot2 {
+                background-color: #0c7db1;
+                border-radius: 50%;
+                width: 15px;
+                height: 15px;
+                margin: 0 5px;
+                animation: BounceAnimation 0.5s linear infinite;
+                animation-delay: 0.2s;
+              }
+              
+              @keyframes BounceAnimation {
+                0% {
+                  margin-bottom: 0;
+                }
+                50% {
+                  margin-bottom: 15px;
+                }
+                100% {
+                  margin-bottom: 0;
+                }
+              }
+              
+        }
+                  
+      }
+  }

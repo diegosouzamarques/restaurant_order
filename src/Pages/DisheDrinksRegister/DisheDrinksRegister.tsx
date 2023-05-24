@@ -9,7 +9,6 @@ import style from "./DisheDrinksRegister.module.scss";
 import { useState, useEffect } from "react";
 import Carousel from "../../Components/Carousel/Carousel";
 import { useNavigate } from "react-router-dom";
-import { DisheDrink } from "../../Model/DisheDrink";
 import useRegisterDisheDrink from "../../State/Hooks/DisheDrink/useRegisterDisheDrink";
 
 const DisheDrinksRegister = () => {
@@ -39,7 +38,8 @@ const DisheDrinksRegister = () => {
     evento.preventDefault();
 
     try {
-      registerDisheDrink(110, kind, title, descript, origin, type, volume, Number(price));
+
+      registerDisheDrink(undefined, kind, title, descript, origin, type, volume, Number(price), imagens);
 
     } catch (error) {
       let e = error as Error;

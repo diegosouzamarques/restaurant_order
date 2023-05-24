@@ -6,8 +6,8 @@ export class Table {
   readonly id: number | undefined;
   readonly title: string;
   readonly amountPeople: number;
-  readonly status: TableStatus;
-  readonly order: Order | undefined;
+   status: TableStatus;
+   order: Order | undefined;
 
   constructor(
     id: number | undefined,

@@ -7,13 +7,14 @@ import ListItem from "../../Components/ListItem/ListItem";
 import Option from "../../Type/Option";
 import style from "./Order.module.scss";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import MenuItem from "../../Components/MenuItem/MenuItem";
 import Amount from "../../Components/Amount/Amount";
-import useListDisheDrink from "../../State/Hooks/DisheDrink/useListDisheDrink";
 import useRegisterOrder from "../../State/Hooks/Order/useRegisterOrder";
 import { OrderItem } from "../../Model/OrderItem";
 import useListTable from "../../State/Hooks/Table/useListTable"; 
+import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
+import Spinner from "../../Components/Spinner/Spinner";
 
 const Order = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const Order = () => {
       price: 5.67,
     },
   ]);
-  const listDishe = useListDisheDrink();
+
   const registerOrder = useRegisterOrder();
   const listTable = useListTable();
 
@@ -64,8 +65,14 @@ const Order = () => {
     setShowAmount(false);
   };
 
+  const back_navigate = () => {
+    navigate("/");
+  };
+
   const onBack = () => {
     setMenu(false);
+    let button_back = document.getElementById("button_back");
+    if (button_back) button_back.onclick = back_navigate;
   };
 
   const setValue = (value: string) => {
@@ -79,18 +86,16 @@ const Order = () => {
     });
   };
 
-  const clickItem = (event: React.MouseEvent<HTMLDivElement>) => {
-    let id = Number(event.currentTarget.getAttribute("data-id"));
-    let prato = listDishe.find((element) => element.id === id) ?? null;
+  const clickItem = (selected :DisheDrinkModel) => {
     setItemOrder({
       id:undefined,
       disheDrinkId: 1,
       orderId: 10,
-      title: prato?.title ?? "",
+      title: selected?.title ?? "",
       quantity: 0,
-      price: Number(prato?.price),
+      price: Number(selected?.price),
     });
-    setMenu(false);
+    onBack();
     setShowAmount(true);
   };
 
@@ -112,7 +117,13 @@ const Order = () => {
         toChange={setValue}
         addItem={addItem}
       ></Amount>
-      <MenuItem show={menu} onClick={clickItem} onBack={onBack}></MenuItem>
+      {
+        menu &&
+        <Suspense fallback={<Spinner/>}>
+          <MenuItem show={menu} onSelected={clickItem} onBack={onBack}></MenuItem>
+        </Suspense>
+      }
+
       <form
         onSubmit={aoSalvar}
         className={classNames({

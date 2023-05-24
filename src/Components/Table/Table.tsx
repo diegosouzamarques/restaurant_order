@@ -19,7 +19,7 @@ return(
                                             style[`table__header__status__${statusTable}`])}>Ocupada - 1hora</span>
             </div>
             <div className={style.table__requester}><strong>Solicitante: </strong><span>{props.table.order?.requester}</span></div>
-            <div className={style.table__requester}><strong>Total: </strong><span>$ {props.table.order?.total().toFixed(2)}</span></div>
+            <div className={style.table__requester}><strong>Total: </strong><span>$ {props.table.order?.total()?.toFixed(2)}</span></div>
         </div>   
 );
 }

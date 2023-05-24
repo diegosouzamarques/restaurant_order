@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import style from "./DisheDrinkDetails.module.scss";
-import Imagem from "../../Type/Image";
 import { useState, useEffect } from "react";
 
 import DisheDrink from "../../Components/DisheDrink/DisheDrink";
@@ -12,7 +11,6 @@ import useListDisheDrink from "../../State/Hooks/DisheDrink/useListDisheDrink";
 const DisheDrinkDetails = () => {
   const [prato, setPrato] = useState<DisheDrinkModel>();
   const navigate = useNavigate();
-  const imagens: Imagem[] = [];
   const { id } = useParams();
   const listDishe = useListDisheDrink();
 
