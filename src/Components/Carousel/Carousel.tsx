@@ -8,7 +8,7 @@ interface ICarrousel {
 }
 
 const Carousel = ({ ...props }: ICarrousel) => {
-  const [imagens, setImagens] = useState<File[]>([]);
+  const [imagens, setImagens] = useState<string[]>([]);
   const [css, setCss] = useState({});
   const [width, setWidth] = useState({});
   const translateAmount = 100;
@@ -16,12 +16,14 @@ const Carousel = ({ ...props }: ICarrousel) => {
   const [prevVisible, setPrevVisible] = useState(true);
   const [nextVisible, setNextVisible] = useState(true);
 
-  useEffect(() => {
+  useEffect(() => { 
     if (props.imagens && props.imagens?.length > 0) {
       if (props.imagens?.length > 1)
         setWidth({ width: props.imagens?.length * 100 + "%" });
 
-      setImagens(props.imagens);
+      if(imagens.length < props.imagens?.length){
+        setImagens(props.imagens.map(photo => URL.createObjectURL(photo)));
+      }     
     }
 
     setCss({
@@ -92,7 +94,7 @@ const Carousel = ({ ...props }: ICarrousel) => {
                     <img
                       className={style.carousel__slides__items__item__size}
                       key={index}
-                      src={URL.createObjectURL(photo)}
+                      src={photo}
                     />
                   </div>
                 );

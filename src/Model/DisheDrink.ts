@@ -8,7 +8,7 @@ export class DisheDrink {
   readonly descript: string;
   readonly origin: string;
   readonly type: string;
-  readonly volume: string;
+  readonly volume: number;
   readonly price: number;
 
   constructor(
@@ -18,7 +18,7 @@ export class DisheDrink {
     descript = "",
     origin = "",
     type = "",
-    volume = "",
+    volume = 0,
     price = 0
   ) {
     DisheDrinkBussines(id,

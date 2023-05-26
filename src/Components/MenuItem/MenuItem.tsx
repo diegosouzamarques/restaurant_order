@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
 import useListDisheDrink from "../../State/Hooks/DisheDrink/useListDisheDrink";
+import { useRecoilRefresher_UNSTABLE } from "recoil";
+import { DisheDrinks } from "../../State/Atom/DisheDrinks";
 
 interface propsMenuItem {
-  onSelected?: (selected :DisheDrinkModel) => void;
+  onSelected?: (selected: DisheDrinkModel) => void;
   onBack?: () => void;
   show: boolean;
 }
@@ -22,7 +24,13 @@ const MenuItem = ({ ...props }: propsMenuItem) => {
 
   const listDishe = useListDisheDrink();
 
+  const RefresApi = () => {
+    const refresh = useRecoilRefresher_UNSTABLE(DisheDrinks);
+    refresh();
+}
+
   const clickCategoria = (event: React.MouseEvent<HTMLLIElement>) => {
+    RefresApi();
     setActive(Number(event.currentTarget.id));
     setPratos([...listDishe]);
   };
@@ -40,7 +48,7 @@ const MenuItem = ({ ...props }: propsMenuItem) => {
   const clickItem = (event: React.MouseEvent<HTMLDivElement>) => {
     let id = Number(event.currentTarget.getAttribute("data-id"));
     let prato = listDishe.find((element) => element.id === id);
-    if(props.onSelected && prato)props.onSelected(prato);
+    if (props.onSelected && prato) props.onSelected(prato);
   };
 
   return (
@@ -87,21 +95,21 @@ const MenuItem = ({ ...props }: propsMenuItem) => {
         <div className={style.categoria}>
           <img />
         </div>
-      )}     
-        {pratos.length > 0 && (
-          <div className={style.container}>
-            {pratos.map((item, index) => (
-              <div key={index} className={style.container__item}>
-                <DisheDrink
-                  dishe={item}
-                  key={index}
-                  onClick={clickItem}
-                  cardMode={true}
-                />
-              </div>
-            ))}
-          </div>
-        )}
+      )}
+      {pratos.length > 0 && (
+        <div className={style.container}>
+          {pratos.map((item, index) => (
+            <div key={index} className={style.container__item}>
+              <DisheDrink
+                dishe={item}
+                key={index}
+                onClick={clickItem}
+                cardMode={true}
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

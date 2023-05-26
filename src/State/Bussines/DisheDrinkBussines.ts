@@ -6,7 +6,7 @@ const DisheDrinkBussines = (id: number | undefined,
     descript = "",
     origin = "",
     type = "",
-    volume = "",
+    volume = 0,
     price = 0) => {
 
     if (kind <= 0) throw new Error("Kind cannot be blank or null.");  

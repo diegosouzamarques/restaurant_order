@@ -1,47 +1,39 @@
-import { useSetRecoilState } from "recoil";
-import { DisheDrinks } from "../../Atom/DisheDrinks";
 import { DisheDrink } from "../../../Model/DisheDrink";
 import { KindDisheDrink } from "../../../Enum/KindDisheDrink";
 import { create, createImage } from "../../../Service/DisheDrinkApi";
 
-const useRegisterDisheDrink = () => {
-  const setListDisheDrink = useSetRecoilState<DisheDrink[]>(DisheDrinks);
-  return (
-    id: number | undefined,
-    kind: KindDisheDrink,
-    title = "",
-    descript = "",
-    origin = "",
-    type = "",
-    volume = "",
-    price = 0,
-    files: File[] | undefined
-  ) => {
-    let add = new DisheDrink(
-      id,
-      kind,
-      title,
-      descript,
-      origin,
-      type,
-      volume,
-      price
-    );
-    create(add)
-      .then((res) => {
-        add.id = res.id;
-        files?.forEach((i) => {
-          if (add.id)
-            createImage(add.id, i).catch((err) => {
-              throw new Error(err);
-            });
-        });
-        return setListDisheDrink((listOld) => [...listOld, add]);
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
-  };
+const RegisterDisheDrink =
+async (
+  id: number | undefined,
+  kind: KindDisheDrink,
+  title = "",
+  descript = "",
+  origin = "",
+  type = "",
+  volume = 0,
+  price = 0,
+  files: File[] | undefined
+) => {
+  let add = new DisheDrink(
+    id,
+    kind,
+    title,
+    descript,
+    origin,
+    type,
+    volume,
+    price
+  );
+  let rs = await create(add);
+  if(rs.id){
+
+    add.id = rs.id;
+    files?.forEach(async(i) => {
+       await createImage(Number(rs.id), i);
+    });
+   return add;
+  }
 };
 
-export default useRegisterDisheDrink;
+
+export default RegisterDisheDrink;
