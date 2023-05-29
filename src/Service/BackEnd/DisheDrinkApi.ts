@@ -1,7 +1,7 @@
-import { DisheDrink } from "../Model/DisheDrink";
-import ResponseApi from "../Type/ResponseApi";
+import { DisheDrink } from "../../Model/DisheDrink";
+import ResponseApi from "../../Type/ResponseApi";
 import ApiConfig from "./ApiConfig";
-import ImageType from "../Type/ImageType";
+import ImageType from "../../Type/ImageType";
 
 export const getAll = async ():Promise<DisheDrink[]> => {
         const response = (await ApiConfig.get<ResponseApi<DisheDrink[]>>('/DisheDrink')).data;

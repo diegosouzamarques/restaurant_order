@@ -1,5 +1,5 @@
 import { KindDisheDrink } from "../Enum/KindDisheDrink";
-import DisheDrinkBussines from "../State/Bussines/DisheDrinkBussines";
+import DisheDrinkBussines from "../Service/Bussines/DisheDrinkBussines";
 
 export class DisheDrink {
   id: number | undefined;

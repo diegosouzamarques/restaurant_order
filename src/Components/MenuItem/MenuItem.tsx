@@ -4,35 +4,30 @@ import style from "./MenuItem.module.scss";
 import classNames from "classnames";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
-import useListDisheDrink from "../../State/Hooks/DisheDrink/useListDisheDrink";
-import { useRecoilRefresher_UNSTABLE } from "recoil";
-import { DisheDrinks } from "../../State/Atom/DisheDrinks";
 
-interface propsMenuItem {
+type propsMenuItem = {
   onSelected?: (selected: DisheDrinkModel) => void;
   onBack?: () => void;
   show: boolean;
+  listDisheDrink: DisheDrinkModel[];
 }
 
-const MenuItem = ({ ...props }: propsMenuItem) => {
+const MenuItem =  ({ ...props }: propsMenuItem) => {
   const navigate = useNavigate();
   let menuOption = Object.values(CategoryMenu);
   const [active, setActive] = useState(-1);
   const [pratos, setPratos] = useState<DisheDrinkModel[]>([]);
 
-  const listDishe = useListDisheDrink();
-
-  const RefresApi = () => {
-    const refresh = useRecoilRefresher_UNSTABLE(DisheDrinks);
-    refresh();
-}
+  useEffect(() => {
+    if(props.listDisheDrink)
+     setPratos(props.listDisheDrink);
+  }, [props.listDisheDrink]);
+  
 
   const clickCategoria = (event: React.MouseEvent<HTMLLIElement>) => {
-    RefresApi();
     setActive(Number(event.currentTarget.id));
-    setPratos([...listDishe]);
+    setPratos([...props.listDisheDrink]);
   };
 
   useEffect(() => {
@@ -47,7 +42,7 @@ const MenuItem = ({ ...props }: propsMenuItem) => {
 
   const clickItem = (event: React.MouseEvent<HTMLDivElement>) => {
     let id = Number(event.currentTarget.getAttribute("data-id"));
-    let prato = listDishe.find((element) => element.id === id);
+    let prato = pratos.find((element) => element.id === id);
     if (props.onSelected && prato) props.onSelected(prato);
   };
 

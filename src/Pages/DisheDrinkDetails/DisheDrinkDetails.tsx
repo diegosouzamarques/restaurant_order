@@ -5,14 +5,16 @@ import { useState, useEffect } from "react";
 import DisheDrink from "../../Components/DisheDrink/DisheDrink";
 import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
 import { KindDisheDrink } from "../../Enum/KindDisheDrink";
-import useListDisheDrink from "../../State/Hooks/DisheDrink/useListDisheDrink";
+import { ListDisheDrink } from "../../Service/Controller/DisheDrinkController";
 
 
 const DisheDrinkDetails = () => {
   const [prato, setPrato] = useState<DisheDrinkModel>();
   const navigate = useNavigate();
   const { id } = useParams();
-  const listDishe = useListDisheDrink();
+
+  let listDishe: DisheDrinkModel[] = []; 
+  ListDisheDrink().then(rs => listDishe.concat(rs)).catch(console.log);
 
   useEffect(() => {
     let achou = listDishe.find((element) => element.id === Number(id));

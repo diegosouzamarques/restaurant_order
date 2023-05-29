@@ -9,8 +9,8 @@ import style from "./DisheDrinksRegister.module.scss";
 import { useState, useEffect, Suspense } from "react";
 import Carousel from "../../Components/Carousel/Carousel";
 import { useNavigate } from "react-router-dom";
-import RegisterDisheDrink from "../../State/Hooks/DisheDrink/useRegisterDisheDrink";
 import Spinner from "../../Components/Spinner/Spinner";
+import { RegisterDisheDrink } from "../../Service/Controller/DisheDrinkController";
 
 const DisheDrinksRegister = () => {
   const navigate = useNavigate();

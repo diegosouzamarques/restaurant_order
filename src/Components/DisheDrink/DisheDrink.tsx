@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Carousel from "../../Components/Carousel/Carousel";
 import classNames from "classnames";
 import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
-import { getListImage, downloadImage } from "../../Service/DisheDrinkApi";
+import { getListImage, downloadImage } from "../../Service/BackEnd/DisheDrinkApi";
 import { useEffect, useState } from "react";
 
 interface propsDisheDrink {

@@ -10,7 +10,8 @@ import Payment from "../../Components/Payment/Payment";
 import { useEffect, useState } from "react";
 import PaymentMade from "../../Type/PaymentMade";
 import { OrderItem } from "../../Model/OrderItem";
-import useListTable from "../../State/Hooks/Table/useListTable"; 
+import { ListTable } from "../../Service/Controller/TableController";
+import { Table } from "../../Model/Table";
 
 const CloseOrder = () => {
   const { id } = useParams();
@@ -21,7 +22,9 @@ const CloseOrder = () => {
   const [total, setTotal] = useState(0);
   const [pay, setPay] = useState(0);
   const [rest, setRest] = useState(0);
-  const listTable = useListTable();
+
+  const [listTable, setListTable] = useState<Table[]>([]);
+  ListTable().then(rs => setListTable([...rs])).catch(console.log);
 
   const [items, setItems] = useState<OrderItem[]>([
     {

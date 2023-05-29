@@ -7,14 +7,18 @@ import ListItem from "../../Components/ListItem/ListItem";
 import Option from "../../Type/Option";
 import style from "./Order.module.scss";
 import { useNavigate } from "react-router-dom";
-import { Suspense, useState } from "react";
+import { useEffect, useState } from "react";
 import MenuItem from "../../Components/MenuItem/MenuItem";
 import Amount from "../../Components/Amount/Amount";
-import useRegisterOrder from "../../State/Hooks/Order/useRegisterOrder";
 import { OrderItem } from "../../Model/OrderItem";
-import useListTable from "../../State/Hooks/Table/useListTable"; 
-import { DisheDrink as DisheDrinkModel } from "../../Model/DisheDrink";
-import Spinner from "../../Components/Spinner/Spinner";
+import {
+  DisheDrink,
+  DisheDrink as DisheDrinkModel,
+} from "../../Model/DisheDrink";
+import { ListTable } from "../../Service/Controller/TableController";
+import { Table as TableModel } from "../../Model/Table";
+import { RegisterOrder } from "../../Service/Controller/OrderController";
+import { ListDisheDrink } from "../../Service/Controller/DisheDrinkController";
 
 const Order = () => {
   const navigate = useNavigate();
@@ -50,15 +54,26 @@ const Order = () => {
       price: 5.67,
     },
   ]);
+  const [opcoes, setOpcoes] = useState<Option[]>([
+    { id: -1, name: "Escolha uma mesa" },
+  ]);
+  const [pratos, setPratos] = useState<DisheDrink[]>([]);
 
-  const registerOrder = useRegisterOrder();
-  const listTable = useListTable();
-
-  let opcoes: Option[] = [
-    { id: -1, name: "Escolha uma mesa" }
-  ];
-
-  listTable.map((item)=>{opcoes.push({ id: Number(item.id), name: item.title })});
+  useEffect(() => {
+    ListTable()
+      .then((rs) =>
+        rs.map((item) => {
+          setOpcoes((old) => [...old, { id: Number(item.id), name: item.title }]);
+        })
+      )
+      .catch(console.log);
+    ListDisheDrink()
+      .then((rs) => {
+        setPratos(rs);
+        console.log("Order ListDisheDrink", rs);
+      })
+      .catch(console.log);
+  }, []);
 
   const addItem = () => {
     setItems(itemOrder ? items.concat(itemOrder) : items);
@@ -77,7 +92,7 @@ const Order = () => {
 
   const setValue = (value: string) => {
     setItemOrder({
-      id:undefined,
+      id: undefined,
       disheDrinkId: 1,
       orderId: 10,
       title: itemOrder?.title ?? "",
@@ -86,9 +101,9 @@ const Order = () => {
     });
   };
 
-  const clickItem = (selected :DisheDrinkModel) => {
+  const clickItem = (selected: DisheDrinkModel) => {
     setItemOrder({
-      id:undefined,
+      id: undefined,
       disheDrinkId: 1,
       orderId: 10,
       title: selected?.title ?? "",
@@ -103,7 +118,7 @@ const Order = () => {
     evento.preventDefault();
 
     try {
-      registerOrder(100, table, requester, note, undefined, items);
+      RegisterOrder(100, table, requester, note, undefined, items);
     } catch (error) {
       let e = error as Error;
     }
@@ -117,12 +132,14 @@ const Order = () => {
         toChange={setValue}
         addItem={addItem}
       ></Amount>
-      {
-        menu &&
-        <Suspense fallback={<Spinner/>}>
-          <MenuItem show={menu} onSelected={clickItem} onBack={onBack}></MenuItem>
-        </Suspense>
-      }
+      {menu && (
+        <MenuItem
+          show={menu}
+          onSelected={clickItem}
+          onBack={onBack}
+          listDisheDrink={pratos}
+        ></MenuItem>
+      )}
 
       <form
         onSubmit={aoSalvar}

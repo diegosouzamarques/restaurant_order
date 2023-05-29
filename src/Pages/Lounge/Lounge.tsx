@@ -2,11 +2,14 @@ import style from "./Lounge.module.scss";
 import Table from "../../Components/Table/Table";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
-import useListTable from "../../State/Hooks/Table/useListTable";
+import { ListTable } from "../../Service/Controller/TableController";
+import { useState } from "react";
+import { Table as TableModel } from "../../Model/Table";
 
 const Lounge = () => {
   const navigate = useNavigate();
-  const listTables = useListTable();
+  const [listTable, setListTable] = useState<TableModel[]>([]);
+  ListTable().then(rs => setListTable([...rs])).catch(console.log);
   return (
     <>
       <div className={style.operation}>
@@ -36,7 +39,7 @@ const Lounge = () => {
         </div>
       </div>
       <section className={style.lounge}>
-        {listTables.map((table, index) => {
+        {listTable.map((table, index) => {
           return <Table key={index} table={table}></Table>;
         })}
       </section>

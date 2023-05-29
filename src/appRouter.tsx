@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { RecoilRoot } from "recoil";
-import { lazy , Suspense } from "react";
+import { Suspense, lazy } from "react";
 import Spinner from "./Components/Spinner/Spinner";
 
 const DefaultPage = lazy(() => import("./Pages/DefaultPage/DefaultPage"));
@@ -19,17 +18,11 @@ const NotFound = lazy(() => import("./Pages/NotFound/NotFound"));
 
 const AppRouter = () => {
   return (
-    <RecoilRoot>
-           <Suspense fallback={<Spinner />}>
+    <Suspense fallback={<Spinner />}>
       <Router>
         <Routes>
           <Route path="/" element={<DefaultPage />}>
-            <Route index element={
-        
-            <Lounge />
-         
-
-            }></Route>
+            <Route index element={<Lounge />}></Route>
             <Route path="order" element={<Order />}></Route>
             <Route path="menu" element={<Menu />}></Route>
             <Route path="detail/:id?" element={<DisheDrinkDetails />}></Route>
@@ -40,8 +33,7 @@ const AppRouter = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-      </Suspense>
-    </RecoilRoot>
+    </Suspense>
   );
 };
 

@@ -1,5 +1,5 @@
 import { TableStatus } from "../Enum/TableStatus";
-import TableBussines from "../State/Bussines/TableBussines";
+import TableBussines from "../Service/Bussines/TableBussines";
 import { Order } from "./Order";
 
 export class Table {
