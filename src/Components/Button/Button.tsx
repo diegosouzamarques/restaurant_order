@@ -16,10 +16,10 @@ const Button = ({ ...props }: propsButton) => {
         <button
         type={props.type}
         className={classNames({
-          [props.className?props.className:""]:true,
           [style.button]: true,
           [style[`button__${props.nipple}`]]:true,
           [style.button__hidde]: props.hidde,
+          [props.className?props.className:""]:true,
         })}
         onClick={props.onClick}
       >

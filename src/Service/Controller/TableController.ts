@@ -1,22 +1,27 @@
 import { TableStatus } from "../../Enum/TableStatus";
 import { Table } from "../../Model/Table";
-import { getAll } from "../BackEnd/TableApi";
+import { create, getAll, getStatus } from "../BackEnd/TableApi";
 
 export const ListTable = async () => {
   let rs = await getAll();
   return rs;
 };
 
+export const ListTableStatus = async (status: TableStatus) => {
+  let rs = await getStatus(status);
+  return rs;
+};
+
 export const RegisterTable = async (
-  id: number | undefined,
   title = "",
   amoutPeople = 0,
-  status = TableStatus.available,
+  status: TableStatus,
   order = undefined
 ) => {
-  let rs = await ListTable();
-  let listTable: Table[] = rs;
+  let add = new Table(undefined, title, amoutPeople, status, order);
 
-  let add = new Table(id, title, amoutPeople, status, order);
-  return listTable.push(add);
+  let rs = await create(add);
+
+  add.id = rs.id;
+  return add;
 };

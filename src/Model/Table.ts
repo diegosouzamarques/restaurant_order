@@ -3,7 +3,7 @@ import TableBussines from "../Service/Bussines/TableBussines";
 import { Order } from "./Order";
 
 export class Table {
-  readonly id: number | undefined;
+   id: number | undefined;
   readonly title: string;
   readonly amountPeople: number;
    status: TableStatus;
@@ -13,7 +13,7 @@ export class Table {
     id: number | undefined,
     title = "",
     amoutPeople = 0,
-    status = TableStatus.available,
+    status: TableStatus,
     order = undefined
   ) {
     TableBussines(title, amoutPeople);

@@ -9,8 +9,8 @@ import style from "./DisheDrinksRegister.module.scss";
 import { useState, useEffect, Suspense } from "react";
 import Carousel from "../../Components/Carousel/Carousel";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../../Components/Spinner/Spinner";
 import { RegisterDisheDrink } from "../../Service/Controller/DisheDrinkController";
+import SpinnerBox from "../../Components/SpinnerBox/SpinnerBox";
 
 const DisheDrinksRegister = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const DisheDrinksRegister = () => {
   const [volume, setVolume] = useState("");
   const [price, setPrice] = useState("");
   const [imagens, setImagens] = useState<File[]>();
-  
+
   const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {}, []);
@@ -41,7 +41,7 @@ const DisheDrinksRegister = () => {
 
     try {
       setSpinner(true);
-     await RegisterDisheDrink(
+      await RegisterDisheDrink(
         undefined,
         kind,
         title,
@@ -53,7 +53,6 @@ const DisheDrinksRegister = () => {
         imagens
       );
       setSpinner(false);
-      
     } catch (error) {
       setSpinner(false);
       let e = error as Error;
@@ -62,109 +61,106 @@ const DisheDrinksRegister = () => {
   };
 
   return (
-    <>
-      {spinner && <Spinner title="Registering"></Spinner>}
-      {!spinner && (
-        <form onSubmit={aoSalvar} className={style.container}>
-          <Button
-            type="submit"
-            nipple="order"
-            className={style.container__btn_Salvar}
+    <SpinnerBox visible={spinner} title="Registering">
+      <form onSubmit={aoSalvar} className={style.container}>
+        <Button
+          type="submit"
+          nipple="order"
+          className={style.container__btn_Salvar}
+        >
+          Gravar
+        </Button>
+        <div className={style.container__fields}>
+          <div>
+            <Select
+              id="kind"
+              title="Gênero"
+              options={optionKind}
+              selectedValue={optionKind[0]}
+              toChange={(value) => {
+                let i = Number(value);
+                setKind(i);
+              }}
+              required
+            ></Select>
+
+            <InputDefault
+              id="title"
+              type="text"
+              title="Nome"
+              maxCharacter={40}
+              required
+              value={title}
+              toChange={(value) => setTitle(value)}
+            ></InputDefault>
+            <TextArea
+              id="descript"
+              title="Descrição"
+              maxCharacter={350}
+              required
+              value={descript}
+              toChange={(value) => setDescript(value)}
+            ></TextArea>
+          </div>
+
+          <div>
+            <InputDefault
+              id="price"
+              type="number"
+              title="Preço"
+              maxCharacter={10}
+              value={price}
+              toChange={(value) => setPrice(value)}
+              required
+            ></InputDefault>
+            <InputFile
+              id="file"
+              title="Escolha Imagem"
+              toChange={(value) => {
+                imagens
+                  ? setImagens((prevState) => [value!, ...prevState!])
+                  : setImagens([value!]);
+              }}
+              accept=".png, .jpg, .jpeg"
+            ></InputFile>
+          </div>
+
+          <div
+            className={classNames({
+              [style.container__fields__drink]: kind !== 2,
+            })}
           >
-            Gravar
-          </Button>
-          <div className={style.container__fields}>
-            <div>
-              <Select
-                id="kind"
-                title="Gênero"
-                options={optionKind}
-                selectedValue={optionKind[0]}
-                toChange={(value) => {
-                  let i = Number(value);
-                  setKind(i);
-                }}
-                required
-              ></Select>
-
-              <InputDefault
-                id="title"
-                type="text"
-                title="Nome"
-                maxCharacter={40}
-                required
-                value={title}
-                toChange={(value) => setTitle(value)}
-              ></InputDefault>
-              <TextArea
-                id="descript"
-                title="Descrição"
-                maxCharacter={350}
-                required
-                value={descript}
-                toChange={(value) => setDescript(value)}
-              ></TextArea>
-            </div>
-
-            <div>
-              <InputDefault
-                id="price"
-                type="number"
-                title="Preço"
-                maxCharacter={10}
-                value={price}
-                toChange={(value) => setPrice(value)}
-                required
-              ></InputDefault>
-              <InputFile
-                id="file"
-                title="Escolha Imagem"
-                toChange={(value) => {
-                  imagens
-                    ? setImagens((prevState) => [value!, ...prevState!])
-                    : setImagens([value!]);
-                }}
-                accept=".png, .jpg, .jpeg"
-              ></InputFile>
-            </div>
-
-            <div
-              className={classNames({
-                [style.container__fields__drink]: kind !== 2,
-              })}
-            >
-              <InputDefault
-                id="origin"
-                type="text"
-                title="Origem"
-                maxCharacter={50}
-                value={origin}
-                toChange={(value) => setOrigin(value)}
-              ></InputDefault>
-              <InputDefault
-                id="type"
-                type="text"
-                title="Tipo"
-                maxCharacter={50}
-                value={type}
-                toChange={(value) => setType(value)}
-              ></InputDefault>
-              <InputDefault
-                id="volume"
-                type="number"
-                title="Volume (ml)"
-                maxCharacter={10}
-                value={volume}
-                toChange={(value) => setVolume(value)}
-              ></InputDefault>
-            </div>
+            <InputDefault
+              id="origin"
+              type="text"
+              title="Origem"
+              maxCharacter={50}
+              value={origin}
+              toChange={(value) => setOrigin(value)}
+            ></InputDefault>
+            <InputDefault
+              id="type"
+              type="text"
+              title="Tipo"
+              maxCharacter={50}
+              value={type}
+              toChange={(value) => setType(value)}
+            ></InputDefault>
+            <InputDefault
+              id="volume"
+              type="number"
+              title="Volume (ml)"
+              maxCharacter={10}
+              value={volume}
+              toChange={(value) => setVolume(value)}
+            ></InputDefault>
           </div>
-          <div className={style.container__carousel}>
-            <Carousel imagens={imagens}></Carousel>
-          </div>
-        </form>
-      )}
-    </>
+        </div>
+        <div className={style.container__carousel}>
+          <Carousel imagens={imagens}></Carousel>
+        </div>
+      </form>
+    </SpinnerBox>
   );
 };
 export default DisheDrinksRegister;

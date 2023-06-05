@@ -52,8 +52,8 @@ const Amount = ({ ...props }: propsAmount) => {
           type="number"
           required
           value={String(
-            props.itemOrder?.quantity && props.itemOrder?.quantity > 0
-              ? props.itemOrder?.quantity
+            props.itemOrder?.amount && props.itemOrder?.amount > 0
+              ? props.itemOrder?.amount
               : ""
           )}
           toChange={props.toChange}

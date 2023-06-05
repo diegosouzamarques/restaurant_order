@@ -2,7 +2,7 @@ import style from "./Text.module.scss";
 
 interface IText {
     title: string;
-    text:string;
+    text?:string;
 }
 
 const Text = ({...props}:IText) => {

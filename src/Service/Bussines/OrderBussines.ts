@@ -6,7 +6,6 @@ const OrderBussines = (
   requester = "",
   note = "",
   date: Date | undefined,
-  items: Array<OrderItem> | undefined
 ) => {
   if (tableId <= 0)
     throw new Error("Table cannot be blank or null.");

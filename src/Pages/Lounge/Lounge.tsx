@@ -3,15 +3,23 @@ import Table from "../../Components/Table/Table";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { ListTable } from "../../Service/Controller/TableController";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Table as TableModel } from "../../Model/Table";
+import SpinnerBox from "../../Components/SpinnerBox/SpinnerBox";
 
 const Lounge = () => {
   const navigate = useNavigate();
   const [listTable, setListTable] = useState<TableModel[]>([]);
-  ListTable().then(rs => setListTable([...rs])).catch(console.log);
+  const [spinner, setSpinner] = useState(false);
+  useEffect(() => {
+    setSpinner(true);
+    ListTable()
+      .then(rs => setListTable([...rs]))
+      .finally(() => setSpinner(false))
+      .catch(console.log);
+  }, []);
   return (
-    <>
+    <SpinnerBox visible={spinner}>
       <div className={style.operation}>
         <div
           className={classNames(
@@ -32,7 +40,7 @@ const Lounge = () => {
           )}
           onClick={(e) => {
             e.preventDefault();
-            navigate("/close/15");
+            navigate("/close");
           }}
         >
           Close Order
@@ -43,7 +51,7 @@ const Lounge = () => {
           return <Table key={index} table={table}></Table>;
         })}
       </section>
-    </>
+    </SpinnerBox>
   );
 };
 

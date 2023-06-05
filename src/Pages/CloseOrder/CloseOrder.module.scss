@@ -5,7 +5,15 @@
     height: calc(100vh - 50px);
     &__details_order{
         width: 100%;
-        padding-left: .5rem;
+        
+
+        &__button_close{
+            position: absolute;
+            width: 25vw;
+            bottom: 0;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
      }
    
     &__payment{

@@ -5,6 +5,7 @@ import InputDefault from "../Inputs/InputDefault/InputDefault";
 import Button from "../Button/Button";
 import style from "./Payment.module.scss";
 import PaymentMade from "../../Type/PaymentMade";
+import { PaymentType } from "../../Enum/PaymentType";
 
 interface propsPayment {
   show: boolean;
@@ -60,6 +61,29 @@ const Payment = ({ ...props }: propsPayment) => {
     props.cancelItem();
   };
 
+  const setPaymentType = (key: number) => {
+    switch (key) {
+      case 1: {
+        return PaymentType.Credit_Card;
+      }
+      case 2: {
+        return PaymentType.Debit_Card;
+      }
+      case 3: {
+        return PaymentType.Cash;
+      }
+      case 4: {
+        return PaymentType.Pix;
+      }
+      case 5: {
+        return PaymentType.Discount;
+      }
+      default: {
+        return PaymentType.Cash;
+      }
+    }
+  };
+
   const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
 
@@ -68,6 +92,7 @@ const Payment = ({ ...props }: propsPayment) => {
         id: Number(optionPay?.id),
         name: optionPay.name,
         value: Number(valuePay),
+        type: setPaymentType(Number(optionPay.id))
       });
     }
   };

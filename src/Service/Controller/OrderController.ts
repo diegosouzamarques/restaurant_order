@@ -1,35 +1,38 @@
+import { OrderStatus } from "../../Enum/OrderStatus";
 import { Order } from "../../Model/Order";
 import { OrderItem } from "../../Model/OrderItem";
+import { addItem, create } from "../BackEnd/OrderApi";
+import { getAll } from "../BackEnd/TableApi";
 
-export const ListOrder = async () => {
-    const now = new Date();
-let ped = new Order(10, 1, "Maria Marques", "TESTE TESTE", now, [
-    {
-     id: 1,
-     disheDrinkId: 1,
-     orderId: 10,
-     title: "Pizza Marguerita",
-     quantity: 3,
-     price: 10.50
-    }
-]);
-        return [
-            ped,
-            ped,
-            ped,
-            ped
-        ];
- }
+export const ListOrderd = async () => {
+  let rs = await getAll();
+  return rs;
+};
 
-export const RegisterOrder = async (id: number | undefined,
-    tableId = 0,
-    requester = "",
-    note = "",
-    date: Date | undefined,
-    items: Array<OrderItem> | undefined) => {
-    let rs = await ListOrder();
-    let List: Order[] = rs;
-    let add = new Order(id, tableId, requester, note, date, items);
-    return List.push(add);
-    
-  };
+export const RegisterOrder = async (
+  tableId = 0,
+  requester = "",
+  note = "",
+  items: Array<OrderItem> | undefined
+) => {
+  let data = new Date();
+  let add = new Order(
+    undefined,
+    tableId,
+    requester,
+    note,
+    data,
+    OrderStatus.opened
+  );
+  let rs = await create(add);
+  add.id = rs.id;
+
+  if(rs.id){
+    let orderId = rs.id;
+    items?.forEach(async(i)=>{
+        i.orderId = orderId;
+        await addItem(i);
+    });
+  }
+  return add;
+};
